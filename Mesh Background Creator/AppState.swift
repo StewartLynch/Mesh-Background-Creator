@@ -17,6 +17,8 @@ import Foundation
 
 @Observable
 class AppState {
+    
+    var meshObjects: [MeshObject] = [MeshObject.sample]
     var selectedObject: MeshObject
     var selectedDevice = Device.all.first!
     

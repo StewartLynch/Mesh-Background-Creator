@@ -1,7 +1,7 @@
 //
 // ----------------------------------------------
 // Original project: Mesh Background Creator
-// by  Stewart Lynch on 2024-06-11
+// by  Stewart Lynch on 2024-06-12
 //
 // Follow me on Mastodon: @StewartLynch@iosdev.space
 // Follow me on Threads: @StewartLynch (https://www.threads.net)
@@ -13,21 +13,13 @@
 // Copyright © 2024 CreaTECH Solutions. All rights reserved.
 
 
-import Foundation
+import AppKit
 
-struct Device: Identifiable, Hashable {
-    let id = UUID()
-    let width: CGFloat
-    let height: CGFloat
-    let name: String
-    
-    static var all: [Device] {
-       [
-        Device(width: 219, height: 445, name: "iPhone 6.1"),
-        Device(width: 237, height: 485, name: "iPhone 6.7"),
-        Device(width: 566.5, height: 372, name: "iPad 11"), //2266 X 1488
-        Device(width: 683, height: 512, name: "iPad 13")  //2732 X 2048
-
-        ]
+extension NSColor {
+    static var random: NSColor {
+        let red = CGFloat.random(in: 0...1)
+            let green = CGFloat.random(in: 0...1)
+            let blue = CGFloat.random(in: 0...1)
+            return NSColor(red: red, green: green, blue: blue, alpha: 1.0)
     }
 }

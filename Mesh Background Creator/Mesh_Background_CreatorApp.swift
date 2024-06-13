@@ -22,11 +22,11 @@ struct Mesh_Background_CreatorApp: App {
         WindowGroup {
             MeshCreatorView()
                 .frame(
-                  minWidth: 800,
-                  idealWidth: 800,
+                  minWidth: 1050,
+                  idealWidth: 1050,
                   maxWidth: .infinity,
-                  minHeight: 600,
-                  idealHeight: 600,
+                  minHeight: 700,
+                  idealHeight: 700,
                   maxHeight: .infinity)
                 .environment(appState)
         }
