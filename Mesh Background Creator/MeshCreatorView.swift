@@ -154,7 +154,7 @@ struct MeshCreatorView: View {
                     ZStack {
                         // Rectangle
                         let object = appState.selectedObject
-                        var points = appState.selectedObject.meshPoints.flatMap { $0 }.map {$0.point}
+                        let points = appState.selectedObject.meshPoints.flatMap { $0 }.map {$0.point}
                         let sPoints:[SIMD2<Float>] = points.map { point in
                                 .init(Float(point.xCoord), Float(point.yCoord))
                         }
