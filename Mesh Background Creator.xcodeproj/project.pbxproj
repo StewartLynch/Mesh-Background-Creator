@@ -3,38 +3,50 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 60;
+	objectVersion = 70;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		BB180F092C19F9C50060F6E4 /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB180F082C19F9C50060F6E4 /* AppState.swift */; };
-		BB180F0B2C1A5E680060F6E4 /* Color+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB180F0A2C1A5E680060F6E4 /* Color+Extension.swift */; };
-		BB46CE302C1AA78D00508E96 /* NSColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB46CE2F2C1AA78D00508E96 /* NSColor+Extension.swift */; };
-		BB46CE322C1AA7D300508E96 /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB46CE312C1AA7D100508E96 /* Models.swift */; };
-		BB46CE342C1AA83000508E96 /* PointView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB46CE332C1AA83000508E96 /* PointView.swift */; };
-		BB46CE362C1AA86200508E96 /* InspectorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB46CE352C1AA85A00508E96 /* InspectorView.swift */; };
 		BB5954542C1911EF003838AB /* Mesh_Background_CreatorApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5954532C1911EF003838AB /* Mesh_Background_CreatorApp.swift */; };
 		BB5954582C1911F0003838AB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BB5954572C1911F0003838AB /* Assets.xcassets */; };
 		BB59545B2C1911F0003838AB /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BB59545A2C1911F0003838AB /* Preview Assets.xcassets */; };
-		BB6781212C194F5B00558680 /* Device.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB6781202C194F4B00558680 /* Device.swift */; };
-		BB85DB5E2C19350D0020D91E /* MeshCreatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB85DB5D2C19350D0020D91E /* MeshCreatorView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		BB180F082C19F9C50060F6E4 /* AppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
-		BB180F0A2C1A5E680060F6E4 /* Color+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Extension.swift"; sourceTree = "<group>"; };
-		BB46CE2F2C1AA78D00508E96 /* NSColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSColor+Extension.swift"; sourceTree = "<group>"; };
-		BB46CE312C1AA7D100508E96 /* Models.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Models.swift; sourceTree = "<group>"; };
-		BB46CE332C1AA83000508E96 /* PointView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PointView.swift; sourceTree = "<group>"; };
-		BB46CE352C1AA85A00508E96 /* InspectorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InspectorView.swift; sourceTree = "<group>"; };
 		BB5954502C1911EF003838AB /* Mesh Background Creator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Mesh Background Creator.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BB5954532C1911EF003838AB /* Mesh_Background_CreatorApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mesh_Background_CreatorApp.swift; sourceTree = "<group>"; };
 		BB5954572C1911F0003838AB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		BB59545A2C1911F0003838AB /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		BB59545C2C1911F0003838AB /* Mesh_Background_Creator.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Mesh_Background_Creator.entitlements; sourceTree = "<group>"; };
-		BB6781202C194F4B00558680 /* Device.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Device.swift; sourceTree = "<group>"; };
-		BB85DB5D2C19350D0020D91E /* MeshCreatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeshCreatorView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		BB46CE3B2C1AAB4600508E96 /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				InspectorView.swift,
+				MeshCreatorView.swift,
+				PointView.swift,
+			);
+			target = BB59544F2C1911EF003838AB /* Mesh Background Creator */;
+		};
+		BB46CE4C2C1AABEE00508E96 /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Device.swift,
+				Models.swift,
+			);
+			target = BB59544F2C1911EF003838AB /* Mesh Background Creator */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		BB46CE3A2C1AAB4600508E96 /* Views */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (BB46CE3B2C1AAB4600508E96 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = Views; sourceTree = "<group>"; };
+		BB46CE3F2C1AABA200508E96 /* Extensions */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Extensions; sourceTree = "<group>"; };
+		BB46CE4B2C1AABEE00508E96 /* Object Models */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (BB46CE4C2C1AABEE00508E96 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = "Object Models"; sourceTree = "<group>"; };
+/* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		BB59544D2C1911EF003838AB /* Frameworks */ = {
@@ -66,15 +78,11 @@
 		BB5954522C1911EF003838AB /* Mesh Background Creator */ = {
 			isa = PBXGroup;
 			children = (
-				BB180F082C19F9C50060F6E4 /* AppState.swift */,
 				BB5954532C1911EF003838AB /* Mesh_Background_CreatorApp.swift */,
-				BB85DB5D2C19350D0020D91E /* MeshCreatorView.swift */,
-				BB46CE352C1AA85A00508E96 /* InspectorView.swift */,
-				BB46CE332C1AA83000508E96 /* PointView.swift */,
-				BB6781202C194F4B00558680 /* Device.swift */,
-				BB180F0A2C1A5E680060F6E4 /* Color+Extension.swift */,
-				BB46CE2F2C1AA78D00508E96 /* NSColor+Extension.swift */,
-				BB46CE312C1AA7D100508E96 /* Models.swift */,
+				BB180F082C19F9C50060F6E4 /* AppState.swift */,
+				BB46CE3A2C1AAB4600508E96 /* Views */,
+				BB46CE4B2C1AABEE00508E96 /* Object Models */,
+				BB46CE3F2C1AABA200508E96 /* Extensions */,
 				BB5954572C1911F0003838AB /* Assets.xcassets */,
 				BB59545C2C1911F0003838AB /* Mesh_Background_Creator.entitlements */,
 				BB5954592C1911F0003838AB /* Preview Content */,
@@ -104,6 +112,9 @@
 			buildRules = (
 			);
 			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				BB46CE3F2C1AABA200508E96 /* Extensions */,
 			);
 			name = "Mesh Background Creator";
 			productName = "Mesh Background Creator";
@@ -160,15 +171,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BB85DB5E2C19350D0020D91E /* MeshCreatorView.swift in Sources */,
-				BB180F0B2C1A5E680060F6E4 /* Color+Extension.swift in Sources */,
-				BB46CE322C1AA7D300508E96 /* Models.swift in Sources */,
-				BB46CE362C1AA86200508E96 /* InspectorView.swift in Sources */,
-				BB46CE302C1AA78D00508E96 /* NSColor+Extension.swift in Sources */,
 				BB5954542C1911EF003838AB /* Mesh_Background_CreatorApp.swift in Sources */,
 				BB180F092C19F9C50060F6E4 /* AppState.swift in Sources */,
-				BB6781212C194F5B00558680 /* Device.swift in Sources */,
-				BB46CE342C1AA83000508E96 /* PointView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

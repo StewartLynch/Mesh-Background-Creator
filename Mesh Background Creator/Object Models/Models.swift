@@ -45,13 +45,12 @@ class MeshObject: Identifiable {
     }
 
     let id = UUID()
-    let name: String
-    let width: Int
-    let height: Int
+    var name: String
+    var width: Int
+    var height: Int
     var meshPoints: [[MeshPoint]]
-    var lightShadow: Color = .gray
-    var darkShadow: Color = .white
-    var withShadow: Bool = true
+    var shadow: Color = .gray
+    var withShadow: Bool = false
     
     init(name: String, width: Int, height: Int, meshPoints: [[MeshPoint]]) {
         self.name = name
@@ -59,6 +58,46 @@ class MeshObject: Identifiable {
         self.height = height
         self.meshPoints = meshPoints
     }
+    //\(String(format: "%.2f", point.xCoord))
+    var code: String {
+        var points = ""
+        for row in meshPoints {
+            var rowString = ""
+            for meshPoint in row {
+                rowString += "(\(String(format: "%.2f", meshPoint.point.xCoord)), \(String(format: "%.2f", meshPoint.point.yCoord))),"
+            }
+            points += rowString + "\n"
+        }
+        points = String(points.dropLast(2))
+        
+        var colors = ""
+        for row in meshPoints {
+            var rowString = ""
+            for meshPoint in row {
+                
+            }
+            colors += rowString + "\n"
+        }
+        colors = String(colors.dropLast(2))
+        
+let code = """
+MeshGradient(
+    width: \(width),
+    height: \(height),
+    points: [
+            \(points)
+            ],
+    colors: [
+           \(colors)
+            ]
+)
+"""
+        return code
+    }
+    
+
+    
+    
     
     func generateSampleMeshPoints() -> [[MeshPoint]] {
         var rowBreaks: [CGFloat] {
@@ -101,7 +140,7 @@ class MeshObject: Identifiable {
     }
            
     static var sample: MeshObject {
-        let newMeshObject = MeshObject(name: "Sample", width: 3, height: 3, meshPoints: [])
+        let newMeshObject = MeshObject(name: "Sample", width: 4, height: 3, meshPoints: [])
         let points = newMeshObject.generateSampleMeshPoints()
         newMeshObject.meshPoints = points
         return newMeshObject
@@ -109,18 +148,32 @@ class MeshObject: Identifiable {
     
 }
 
-
-struct MeshPoint {
+@Observable
+class MeshPoint {
     var row: Int
     var col: Int
     var point: MPoint
     var symbol: MeshObject.Symbol
+    init(row: Int, col: Int, point: MPoint, symbol: MeshObject.Symbol) {
+        self.row = row
+        self.col = col
+        self.point = point
+        self.symbol = symbol
+    }
 }
 
-struct MPoint: Identifiable {
+@Observable
+class MPoint: Identifiable {
     var id = UUID()
     var xCoord: CGFloat
     var yCoord: CGFloat
     let dragOffset = CGSize.zero
     var color: Color
+    
+    init(id: UUID = UUID(), xCoord: CGFloat, yCoord: CGFloat, color: Color) {
+        self.id = id
+        self.xCoord = xCoord
+        self.yCoord = yCoord
+        self.color = color
+    }
 }

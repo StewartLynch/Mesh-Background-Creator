@@ -20,7 +20,7 @@ struct PointView: View {
     let selectedDevice:Device
     let size: CGSize
     let symbol: String
-    @Binding var meshPoint: MPoint
+    @Bindable var meshPoint: MPoint
     var body: some View {
         Image(systemName: "\(symbol).fill")
             .font(.title)
