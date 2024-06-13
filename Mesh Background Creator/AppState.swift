@@ -18,6 +18,7 @@ import Foundation
 @Observable
 class AppState {
     var selectedObject: MeshObject
+    var selectedDevice = Device.all.first!
     
     init(selectedObject: MeshObject) {
         self.selectedObject = selectedObject

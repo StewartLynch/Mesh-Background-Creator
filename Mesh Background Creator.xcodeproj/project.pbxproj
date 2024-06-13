@@ -8,24 +8,22 @@
 
 /* Begin PBXBuildFile section */
 		BB180F092C19F9C50060F6E4 /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB180F082C19F9C50060F6E4 /* AppState.swift */; };
+		BB180F0B2C1A5E680060F6E4 /* Color+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB180F0A2C1A5E680060F6E4 /* Color+Extension.swift */; };
 		BB5954542C1911EF003838AB /* Mesh_Background_CreatorApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5954532C1911EF003838AB /* Mesh_Background_CreatorApp.swift */; };
-		BB5954562C1911EF003838AB /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5954552C1911EF003838AB /* ContentView.swift */; };
 		BB5954582C1911F0003838AB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BB5954572C1911F0003838AB /* Assets.xcassets */; };
 		BB59545B2C1911F0003838AB /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BB59545A2C1911F0003838AB /* Preview Assets.xcassets */; };
-		BB5954632C191970003838AB /* TestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5954622C191970003838AB /* TestView.swift */; };
 		BB6781212C194F5B00558680 /* Device.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB6781202C194F4B00558680 /* Device.swift */; };
 		BB85DB5E2C19350D0020D91E /* MeshCreatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB85DB5D2C19350D0020D91E /* MeshCreatorView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		BB180F082C19F9C50060F6E4 /* AppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
+		BB180F0A2C1A5E680060F6E4 /* Color+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Extension.swift"; sourceTree = "<group>"; };
 		BB5954502C1911EF003838AB /* Mesh Background Creator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Mesh Background Creator.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BB5954532C1911EF003838AB /* Mesh_Background_CreatorApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mesh_Background_CreatorApp.swift; sourceTree = "<group>"; };
-		BB5954552C1911EF003838AB /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		BB5954572C1911F0003838AB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		BB59545A2C1911F0003838AB /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		BB59545C2C1911F0003838AB /* Mesh_Background_Creator.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Mesh_Background_Creator.entitlements; sourceTree = "<group>"; };
-		BB5954622C191970003838AB /* TestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestView.swift; sourceTree = "<group>"; };
 		BB6781202C194F4B00558680 /* Device.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Device.swift; sourceTree = "<group>"; };
 		BB85DB5D2C19350D0020D91E /* MeshCreatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeshCreatorView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -61,11 +59,10 @@
 			isa = PBXGroup;
 			children = (
 				BB5954532C1911EF003838AB /* Mesh_Background_CreatorApp.swift */,
-				BB5954552C1911EF003838AB /* ContentView.swift */,
-				BB5954622C191970003838AB /* TestView.swift */,
 				BB85DB5D2C19350D0020D91E /* MeshCreatorView.swift */,
 				BB180F082C19F9C50060F6E4 /* AppState.swift */,
 				BB6781202C194F4B00558680 /* Device.swift */,
+				BB180F0A2C1A5E680060F6E4 /* Color+Extension.swift */,
 				BB5954572C1911F0003838AB /* Assets.xcassets */,
 				BB59545C2C1911F0003838AB /* Mesh_Background_Creator.entitlements */,
 				BB5954592C1911F0003838AB /* Preview Content */,
@@ -152,10 +149,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				BB85DB5E2C19350D0020D91E /* MeshCreatorView.swift in Sources */,
-				BB5954562C1911EF003838AB /* ContentView.swift in Sources */,
+				BB180F0B2C1A5E680060F6E4 /* Color+Extension.swift in Sources */,
 				BB5954542C1911EF003838AB /* Mesh_Background_CreatorApp.swift in Sources */,
 				BB180F092C19F9C50060F6E4 /* AppState.swift in Sources */,
-				BB5954632C191970003838AB /* TestView.swift in Sources */,
 				BB6781212C194F5B00558680 /* Device.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

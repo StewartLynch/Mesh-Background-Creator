@@ -14,54 +14,102 @@
 
 @Observable
 class MeshObject: Identifiable {
-    /*
-     MeshGradient(width: 3, height: 3, points: [
-         .init(0, 0), .init(0.5, 0), .init(1, 0),
-         .init(0, 0.5), .init(0.5, 0.5), .init(1, 0.5),
-         .init(0, 1), .init(0.5, 1), .init(1, 1)
-     ], colors: [
-         .red, .purple, .indigo,
-         .orange, .white, .blue,
-         .yellow, .green, .mint
-     ])
-     */
+    static var colors: [Color] {
+        [
+            .red, .purple, .indigo,
+            .orange, .white, .blue,
+            .yellow, .green, .mint,
+            .teal, .red, .indigo
+        ]
+    }
+    
+    enum Symbol: String, CaseIterable {
+        case circle
+        case square
+        case triangle
+        case diamond
+        case star
+        case hexagon
+    }
+    
+    static var pointColors: [Color] {
+        [
+            .blue,
+            .red,
+            .green,
+            .orange,
+            .teal
+        ]
+    }
+
     let id = UUID()
     let name: String
     let width: Int
     let height: Int
-    var meshPoint: MeshPoint
+    var meshPoints: [[MeshPoint]]
     
-    init(name: String, width: Int, height: Int, meshPoint: MeshPoint) {
+    init(name: String, width: Int, height: Int, meshPoints: [[MeshPoint]]) {
         self.name = name
         self.width = width
         self.height = height
-        self.meshPoint = meshPoint
+        self.meshPoints = meshPoints
     }
     
-    static var sample:MeshObject {
-        .init(
-            name: "First",
-            width: 3,
-            height: 3,
-            meshPoint: .init(
-                points: [
-                    .init(xCoord: 0, yCoord: 0), .init(xCoord: 0.5, yCoord: 0), .init(xCoord: 1, yCoord: 0),
-                    .init(xCoord: 0, yCoord: 0.5), .init(xCoord: 0.5, yCoord: 0.5), .init(xCoord: 1, yCoord: 0.5),
-                    .init(xCoord: 0, yCoord: 1), .init(xCoord: 0.5, yCoord: 1), .init(xCoord: 1, yCoord: 1),
-                ],
-                colors: [.red, .purple, .indigo,
-                         .orange, .white, .blue,
-                         .yellow, .green, .mint]
-            )
-        )
+    func generateSampleMeshPoints() -> [[MeshPoint]] {
+        var rowBreaks: [CGFloat] {
+            var rowBreaks: [CGFloat] = []
+            (0...height-1).forEach { index in
+                rowBreaks.append(CGFloat(index) / CGFloat(height-1))
+            }
+            return rowBreaks
+        }
+        var colBreaks: [CGFloat] {
+            var colBreaks: [CGFloat] = []
+            (0...width-1).forEach { index in
+                colBreaks.append(CGFloat(index) / CGFloat(width-1))
+            }
+            return colBreaks
+        }
+        var allPoints: [[MeshPoint]] = []
+        var symbols = MeshObject.Symbol.allCases
+        (0..<height).forEach { row in
+            let symbol = symbols.first
+            var points: [MeshPoint] = []
+            (0..<width).forEach { col in
+                let newPoint = MeshPoint(
+                    row: row,
+                    col: col,
+                    point: .init(
+                        xCoord: colBreaks[col],
+                        yCoord: rowBreaks[row],
+                        color: MeshObject.colors.randomElement()!
+                    ),
+                    symbol: symbol!
+                )
+                points.append(newPoint)
+            }
+            symbols.removeFirst()
+            allPoints.append(points)
+        }
+
+        return allPoints
+    }
+           
+    static var sample: MeshObject {
+        let newMeshObject = MeshObject(name: "Sample", width: 3, height: 3, meshPoints: [])
+        let points = newMeshObject.generateSampleMeshPoints()
+        newMeshObject.meshPoints = points
+        return newMeshObject
     }
     
 }
 
 
 struct MeshPoint {
-    var points: [MPoint]
-    var colors: [Color]
+    var row: Int
+    var col: Int
+    var point: MPoint
+    var symbol: MeshObject.Symbol
 }
 
 struct MPoint: Identifiable {
@@ -69,6 +117,7 @@ struct MPoint: Identifiable {
     var xCoord: CGFloat
     var yCoord: CGFloat
     let dragOffset = CGSize.zero
+    var color: Color
 }
 
 
@@ -104,21 +153,43 @@ struct MeshCreatorView: View {
                 GeometryReader { geometry in
                     ZStack {
                         // Rectangle
+                        let object = appState.selectedObject
+                        var points = appState.selectedObject.meshPoints.flatMap { $0 }.map {$0.point}
+                        let sPoints:[SIMD2<Float>] = points.map { point in
+                                .init(Float(point.xCoord), Float(point.yCoord))
+                        }
+                        let colors: [Color] = points.map { point in
+                            point.color
+                        }
                         RoundedRectangle(cornerRadius: 30 )
                             .stroke(Color.primary, lineWidth: 4)
                             .frame(width: selectedDevice.width, height: selectedDevice.height)
+                            .overlay{
+                                MeshGradient(
+                                    width: object.width,
+                                    height: object.height,
+                                    points: sPoints,
+                                    colors: colors
+                                )
+                                .shadow(color: .cyan, radius: 25, x: -10, y: 10)
+                                .clipShape(RoundedRectangle(cornerRadius: 30 ))
+                            }
                             .position(x: geometry.size.width / 2, y: geometry.size.height / 2)
+
                         // Draggable Images
-                        ForEach(0..<appState.selectedObject.meshPoint.points.count, id: \.self) { index in
-                            PointView(
-                                index: index,
-                                selectedDevice: selectedDevice,
-                                size: geometry.size,
-                                meshPoint: Bindable(appState).selectedObject.meshPoint.points[index]
-                            )
+                        ForEach(0..<appState.selectedObject.width, id: \.self) { col in
+                            ForEach(0..<appState.selectedObject.height, id: \.self) { row in
+                                PointView(
+                                    index: row,
+                                    selectedDevice: selectedDevice,
+                                    size: geometry.size, symbol: appState.selectedObject.meshPoints[col][row].symbol.rawValue,
+                                    meshPoint: Bindable(appState).selectedObject.meshPoints[col][row].point
+                                )
+                            }
                         }
                     }
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
+                    
                 }
             }
             .toolbar(content: {
@@ -147,14 +218,18 @@ struct PointView: View {
     let index: Int
     let selectedDevice:Device
     let size: CGSize
+    let symbol: String
     @Binding var meshPoint: MPoint
     var body: some View {
-        Image(systemName: "\(index + 1).circle.fill")
-            .font(.title2)
-            .foregroundColor(.blue)
-            .background(Color.white)
-            .clipShape(.circle)
-            .frame(width: 20, height: 20)
+//        Image(systemName: "\(index + 1).circle.fill")
+        Image(systemName: "\(symbol).fill")
+            .font(.title)
+            .foregroundStyle(meshPoint.color)
+            .overlay {
+                Text("\(index + 1)")
+                    .font(.body)
+                    .foregroundStyle(meshPoint.color.adaptedTextColor)
+            }
             .position(x: (meshPoint.xCoord * selectedDevice.width) + (size.width - selectedDevice.width) / 2,
                       y: (meshPoint.yCoord * selectedDevice.height) + (size.height - selectedDevice.height) / 2)
             .gesture(DragGesture()
@@ -176,22 +251,29 @@ struct PointView: View {
 struct InspectorView: View {
     @Environment(AppState.self) private var appState
     var body: some View {
-        Form {
-            ForEach(0..<appState.selectedObject.meshPoint.points.count, id:\.self) { index in
-                let point = appState.selectedObject.meshPoint.points[index]
-                VStack {
-                    HStack {
-                        Image(systemName: "\(index + 1).circle.fill")
-                            .font(.title2)
-                            .foregroundColor(.blue)
-                            .background(Color.white)
-                            .clipShape(.circle)
-                        Text("(\(String(format: "%.2f", point.xCoord)), \(String(format: "%.2f", point.yCoord)))")
-                        Spacer()
-                        ColorPicker("", selection: Bindable(appState).selectedObject.meshPoint.colors[index])
+        Text(appState.selectedObject.name)
+        VStack {
+            ForEach(0..<appState.selectedObject.width, id: \.self) { col in
+                ForEach(0..<appState.selectedObject.height, id: \.self) { row in
+                    let point = appState.selectedObject.meshPoints[col][row].point
+                    let symbol = appState.selectedObject.meshPoints[col][row].symbol
+                    let color = appState.selectedObject.meshPoints[col][row].point.color
+                    VStack {
+                        HStack {
+                            Image(systemName: "\(symbol)")
+                                .font(.title)
+                                .foregroundStyle(color)
+                                .overlay {
+                                    Text("\(row + 1)")
+                                        .font(.body)
+                                }
+                            Text("(\(String(format: "%.2f", point.xCoord)), \(String(format: "%.2f", point.yCoord)))")
+                            
+                            ColorPicker("", selection: Bindable(appState).selectedObject.meshPoints[col][row].point.color)
+                        }
                     }
                 }
-                    
+                Divider()
             }
         }
        
