@@ -20,7 +20,7 @@ import AppKit
 
 struct MeshCreatorView: View {
     @State private var selectedDevice = Device.all.first!
-    @State private var isSelected = true
+    @State private var showCode = false
     @State private var inspectorIsShown = true
     @Environment(AppState.self) private var appState
     @Environment(\.colorScheme) var mode
@@ -89,7 +89,10 @@ struct MeshCreatorView: View {
                         Label("Show Inspector", systemImage: "sidebar.trailing")
                     }
                     Button("Show Code") {
-                        print(selectedObject.code)
+                        showCode.toggle()
+                    }
+                    .sheet(isPresented: $showCode) {
+                        CodeView(code: selectedObject.code)
                     }
                 })
                 .inspector(isPresented: $inspectorIsShown) {
@@ -108,3 +111,4 @@ struct MeshCreatorView: View {
     MeshCreatorView()
         .environment(AppState(selectedObject: MeshObject.sample))
 }
+

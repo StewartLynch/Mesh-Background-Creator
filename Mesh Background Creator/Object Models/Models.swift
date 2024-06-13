@@ -64,7 +64,7 @@ class MeshObject: Identifiable {
         for row in meshPoints {
             var rowString = ""
             for meshPoint in row {
-                rowString += "(\(String(format: "%.2f", meshPoint.point.xCoord)), \(String(format: "%.2f", meshPoint.point.yCoord))),"
+                rowString += ".init(\(String(format: "%.2f", meshPoint.point.xCoord)), \(String(format: "%.2f", meshPoint.point.yCoord))),"
             }
             points += rowString + "\n"
         }
@@ -74,13 +74,18 @@ class MeshObject: Identifiable {
         for row in meshPoints {
             var rowString = ""
             for meshPoint in row {
-                
+                rowString += "Color(hex: \"\(meshPoint.point.color.toHexString() ?? "??")\")!,"
             }
             colors += rowString + "\n"
         }
         colors = String(colors.dropLast(2))
         
 let code = """
+// The Text Color initializer requires the two extensions available
+// from https://github.com/StewartLynch/PlatformColorAndColorExtensions
+// These will allow you to construct a Color view by providing a valid
+// Hex string for a color.  Extensions work for both iOS and MacOS
+
 MeshGradient(
     width: \(width),
     height: \(height),
@@ -94,9 +99,6 @@ MeshGradient(
 """
         return code
     }
-    
-
-    
     
     
     func generateSampleMeshPoints() -> [[MeshPoint]] {

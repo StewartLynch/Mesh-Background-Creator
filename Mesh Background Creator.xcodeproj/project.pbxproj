@@ -26,6 +26,7 @@
 		BB46CE3B2C1AAB4600508E96 /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
+				CodeView.swift,
 				InspectorView.swift,
 				MeshCreatorView.swift,
 				PointView.swift,

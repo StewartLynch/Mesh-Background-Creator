@@ -1,6 +1,6 @@
 //
 // ----------------------------------------------
-// Original project: Mesh Background Creator
+// Original project: ColorExtensionTesting-2
 // by  Stewart Lynch on 2024-06-13
 //
 // Follow me on Mastodon: @StewartLynch@iosdev.space
@@ -13,18 +13,16 @@
 // Copyright © 2024 CreaTECH Solutions. All rights reserved.
 
 
-import SwiftUI
-#if os(iOS)
-import UIKit
-typealias PlatformColor = UIColor
-#elseif os(macOS)
+#if os(macOS)
 import AppKit
 typealias PlatformColor = NSColor
+#else
+import UIKit
+typealias PlatformColor = UIColor
 #endif
 
-import AppKit
-extension NSColor {
-    // Initializes a new UIColor instance from a hex string
+extension PlatformColor {
+    // Initializes a new UIColor or NSColor instance from a hex string
     convenience init?(hex: String) {
         var hexString = hex.trimmingCharacters(in: .whitespacesAndNewlines).uppercased()
         if hexString.hasPrefix("#") {
@@ -32,7 +30,6 @@ extension NSColor {
         }
 
         let scanner = Scanner(string: hexString)
-
         var rgbValue: UInt64 = 0
         guard scanner.scanHexInt64(&rgbValue) else {
             return nil
@@ -41,15 +38,15 @@ extension NSColor {
         var red, green, blue, alpha: UInt64
         switch hexString.count {
         case 6:
-            red = (rgbValue >> 16)
-            green = (rgbValue >> 8 & 0xFF)
-            blue = (rgbValue & 0xFF)
+            red = (rgbValue >> 16) & 0xFF
+            green = (rgbValue >> 8) & 0xFF
+            blue = rgbValue & 0xFF
             alpha = 255
         case 8:
-            red = (rgbValue >> 16)
-            green = (rgbValue >> 8 & 0xFF)
-            blue = (rgbValue & 0xFF)
-            alpha = rgbValue >> 24
+            red = (rgbValue >> 16) & 0xFF
+            green = (rgbValue >> 8) & 0xFF
+            blue = rgbValue & 0xFF
+            alpha = (rgbValue >> 24) & 0xFF
         default:
             return nil
         }
@@ -57,30 +54,41 @@ extension NSColor {
         self.init(red: CGFloat(red) / 255, green: CGFloat(green) / 255, blue: CGFloat(blue) / 255, alpha: CGFloat(alpha) / 255)
     }
 
-    // Returns a hex string representation of the UIColor instance
+    // Returns a hex string representation of the UIColor or NSColor instance
     func toHexString(includeAlpha: Bool = false) -> String? {
-        // Get the red, green, and blue components of the UIColor as floats between 0 and 1
+        // Get the red, green, and blue components of the UIColor or NSColor as floats between 0 and 1
         guard let components = self.cgColor.components else {
-            // If the UIColor's color space doesn't support RGB components, return nil
             return nil
         }
 
-        // Convert the red, green, and blue components to integers between 0 and 255
         let red = Int(components[0] * 255.0)
         let green = Int(components[1] * 255.0)
         let blue = Int(components[2] * 255.0)
+        let alpha = components.count > 3 ? Int(components[3] * 255.0) : 255
 
-        // Create a hex string with the RGB values and, optionally, the alpha value
-        let hexString: String
-        if includeAlpha, let alpha = components.last {
-            let alphaValue = Int(alpha * 255.0)
-            hexString = String(format: "#%02X%02X%02X%02X", red, green, blue, alphaValue)
+        if includeAlpha {
+            return String(format: "#%02X%02X%02X%02X", alpha, red, green, blue)
         } else {
-            hexString = String(format: "#%02X%02X%02X", red, green, blue)
+            return String(format: "#%02X%02X%02X", red, green, blue)
         }
-
-        // Return the hex string
-        return hexString
     }
     
+    // Calculate luminance of the color
+    func luminance() -> CGFloat {
+        guard let components = self.cgColor.components else {
+            return 0
+        }
+
+        let red = components[0]
+        let green = components[1]
+        let blue = components[2]
+
+        return 0.299 * red + 0.587 * green + 0.114 * blue
+    }
+    
+    // Computed property to get adapted text color based on luminance
+    var adaptedTextColor: PlatformColor {
+        return luminance() > 0.5 ? PlatformColor.black : PlatformColor.white
+    }
+
 }
