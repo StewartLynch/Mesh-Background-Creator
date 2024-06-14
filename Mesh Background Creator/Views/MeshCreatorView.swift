@@ -110,5 +110,7 @@ struct MeshCreatorView: View {
 #Preview {
     MeshCreatorView()
         .environment(AppState(selectedObject: MeshObject.sample))
+        .frame(
+            width: 700, height: 600)
 }
 
