@@ -51,6 +51,8 @@ class MeshObject: Identifiable {
     var meshPoints: [[MeshPoint]]
     var shadow: Color = .gray
     var withShadow: Bool = false
+    var withBackground: Bool = false
+    var backgroundColor: Color = .white
     
     init(name: String, width: Int, height: Int, meshPoints: [[MeshPoint]]) {
         self.name = name
@@ -79,8 +81,7 @@ class MeshObject: Identifiable {
             colors += rowString + "\n"
         }
         colors = String(colors.dropLast(2))
-        
-let code = """
+var code = """
 // The Text Color initializer requires the two extensions available
 // from https://github.com/StewartLynch/PlatformColorAndColorExtensions
 // These will allow you to construct a Color view by providing a valid
@@ -95,8 +96,21 @@ MeshGradient(
     colors: [
            \(colors)
             ]
+"""
+        if withBackground {
+code += 
+"""
+,
+    background: Color(hex: \"\(backgroundColor.toHexString() ?? "??")\")!
 )
 """
+        } else {
+code += """
+)
+"""
+            
+        }
+        
         return code
     }
     

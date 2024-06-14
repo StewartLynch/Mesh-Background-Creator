@@ -21,7 +21,6 @@ struct InspectorView: View {
     @State private var width:Int = 1
     @State private var height: Int = 1
     var body: some View {
-        
         VStack(alignment: .leading) {
             Text(selectedObject.name)
                 .font(.title)
@@ -64,10 +63,17 @@ struct InspectorView: View {
                     .frame(width: 100)
                 }
                 Spacer()
-                GroupBox {
-                    Toggle("Show Shadow", isOn: $selectedObject.withShadow)
-                    ColorPicker("Color", selection: $selectedObject.shadow)
-                    
+                VStack {
+                    Toggle("With Background", isOn: $selectedObject.withBackground)
+                    if selectedObject.withBackground {
+                        ColorPicker("Color", selection: $selectedObject.backgroundColor)
+                    }
+                    if !selectedObject.withBackground {
+                        GroupBox {
+                            Toggle("Show Shadow", isOn: $selectedObject.withShadow)
+                            ColorPicker("Color", selection: $selectedObject.shadow)
+                        }
+                    }
                 }
             }
         .padding()

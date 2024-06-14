@@ -57,7 +57,8 @@ struct MeshCreatorView: View {
                                         width: selectedObject.width,
                                         height: selectedObject.height,
                                         points: sPoints,
-                                        colors: colors
+                                        colors: colors,
+                                        background: selectedObject.withBackground ? selectedObject.backgroundColor : .clear
                                     )
                                     .shadow(color: selectedObject.withShadow ? selectedObject.shadow : .clear, radius: 25, x: -10, y: 10)
                                     .clipShape(RoundedRectangle(cornerRadius: 30 ))
