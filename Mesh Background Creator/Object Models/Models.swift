@@ -98,17 +98,23 @@ MeshGradient(
             ]
 """
         if withBackground {
-code += 
+            code +=
 """
 ,
     background: Color(hex: \"\(backgroundColor.toHexString() ?? "??")\")!
 )
 """
         } else {
-code += """
+            code += """
 )
 """
-            
+        }
+        if withShadow {
+            code +=
+"""
+
+.shadow(color: Color(hex: \"\(shadow.toHexString() ?? "??")\")!, radius: 25, x: -10, y: 10)
+"""
         }
         
         return code
