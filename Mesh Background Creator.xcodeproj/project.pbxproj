@@ -28,6 +28,7 @@
 			membershipExceptions = (
 				CodeView.swift,
 				InspectorView.swift,
+				Menus.swift,
 				MeshCreatorView.swift,
 				PointView.swift,
 			);

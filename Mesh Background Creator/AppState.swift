@@ -22,8 +22,11 @@ class AppState {
     var tempObject: MeshObject = MeshObject.sample
     var selectedDevice = Device.all.first!
     var showPoints = true
-    
+    var showCode = false
+    var export = false
     init(selectedObject: MeshObject?) {
         self.selectedObject = selectedObject
     }
+    
+    
 }

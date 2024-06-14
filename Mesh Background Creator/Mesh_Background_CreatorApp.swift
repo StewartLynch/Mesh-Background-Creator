@@ -28,7 +28,10 @@ struct Mesh_Background_CreatorApp: App {
                   minHeight: 700,
                   idealHeight: 700,
                   maxHeight: .infinity)
-                .environment(appState)
         }
+        .commands {
+            Menus()
+        }
+        .environment(appState)
     }
 }

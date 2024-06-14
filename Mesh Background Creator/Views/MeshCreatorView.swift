@@ -17,10 +17,10 @@
 
 import SwiftUI
 import AppKit
-
+import UniformTypeIdentifiers
 struct MeshCreatorView: View {
     @State private var selectedDevice = Device.all.first!
-    @State private var showCode = false
+    
     @State private var inspectorIsShown = true
     @Environment(AppState.self) private var appState
     @Environment(\.colorScheme) var mode
@@ -41,27 +41,12 @@ struct MeshCreatorView: View {
                     GeometryReader { geometry in
                         ZStack {
                             // Rectangle
-                            
-                            let points = selectedObject.meshPoints.flatMap { $0 }.map {$0.point}
-                            let sPoints:[SIMD2<Float>] = points.map { point in
-                                    .init(Float(point.xCoord), Float(point.yCoord))
-                            }
-                            let colors: [Color] = points.map { point in
-                                point.color
-                            }
                             RoundedRectangle(cornerRadius: 30 )
                                 .stroke(Color.primary, lineWidth: 4)
                                 .frame(width: selectedDevice.width, height: selectedDevice.height)
                                 .overlay{
-                                    MeshGradient(
-                                        width: selectedObject.width,
-                                        height: selectedObject.height,
-                                        points: sPoints,
-                                        colors: colors,
-                                        background: selectedObject.withBackground ? selectedObject.backgroundColor : .clear
-                                    )
-                                    .shadow(color: selectedObject.withShadow ? selectedObject.shadow : .clear, radius: 25, x: -10, y: 10)
-                                    .clipShape(RoundedRectangle(cornerRadius: 30 ))
+                                    MyGradientView(selectedObject: selectedObject)
+                                        .clipShape(RoundedRectangle(cornerRadius: 30 ))
                                 }
                                 .position(x: geometry.size.width / 2, y: geometry.size.height / 2)
                             
@@ -79,21 +64,26 @@ struct MeshCreatorView: View {
                             }
                         }
                         .frame(maxWidth: .infinity, maxHeight: .infinity)
-                        
                     }
-                    
                 }
                 .toolbar(content: {
+                    Button("Get Code", systemImage: "doc.text") {
+                        appState.showCode.toggle()
+                    }
+                    .sheet(isPresented: Bindable(appState).showCode) {
+                        CodeView(code: selectedObject.code)
+                    }
+                    Button("Save Image", systemImage: "square.and.arrow.down") {
+                        Task {
+                            if let url = savePanel(for: .jpeg) {
+                                save(with: .jpeg, at: url)
+                            }
+                        }
+                    }
                     Button {
                         inspectorIsShown.toggle()
                     } label: {
-                        Label("Show Inspector", systemImage: "sidebar.trailing")
-                    }
-                    Button("Show Code") {
-                        showCode.toggle()
-                    }
-                    .sheet(isPresented: $showCode) {
-                        CodeView(code: selectedObject.code)
+                        Label(inspectorIsShown ? "Hide Inspector" : "Show Inspector", systemImage: "sidebar.trailing")
                     }
                 })
                 .inspector(isPresented: $inspectorIsShown) {
@@ -102,12 +92,78 @@ struct MeshCreatorView: View {
                 }
                 .navigationTitle("Mesh Creator")
             }
+            .onChange(of: appState.export) { _, newValue in
+                if newValue {
+                    appState.export = false
+                    Task {
+                        if let url = savePanel(for: .jpeg) {
+                            save(with: .jpeg, at: url)
+                        }
+                    }
+                }
+            }
         } else {
-           Text("Pick it")
+            Text("Pick it")
         }
+    }
+    
+    private func savePanel(for type: UTType) -> URL? {
+        let savePanel = NSSavePanel()
+        savePanel.allowedContentTypes = [type]
+        savePanel.canCreateDirectories = true
+        savePanel.isExtensionHidden = false
+        savePanel.title = "Save the MeshGradient as a Desktop image"
+        savePanel.message = "Choose a folder and a name to store the image."
+        savePanel.nameFieldLabel = "Image file name:"
+
+        return savePanel.runModal() == .OK ? savePanel.url : nil
+    }
+    
+    @MainActor func save(with contentType: ContentType, at url: URL) {
+        let desktopView = MyGradientView(selectedObject: appState.selectedObject!).frame(width: 1920, height: 1080)
+        guard let cgImage = ImageRenderer(content: desktopView).cgImage else {
+            return
+        }
+
+        let image = NSImage(cgImage: cgImage, size: .init(width: 1920, height: 1080))
+        guard let representation = image.tiffRepresentation else { return }
+        let imageRepresentation = NSBitmapImageRep(data: representation)
+
+        let imageData: Data?
+        switch contentType {
+        case .jpeg: imageData = imageRepresentation?.representation(using: .jpeg, properties: [:])
+        case .png: imageData = imageRepresentation?.representation(using: .png, properties: [:])
+        }
+
+        try? imageData?.write(to: url)
     }
 }
 
+enum ContentType {
+    case jpeg
+    case png
+}
+
+struct MyGradientView: View {
+    let selectedObject: MeshObject
+    var body: some View {
+        let points = selectedObject.meshPoints.flatMap { $0 }.map {$0.point}
+        let sPoints:[SIMD2<Float>] = points.map { point in
+                .init(Float(point.xCoord), Float(point.yCoord))
+        }
+        let colors: [Color] = points.map { point in
+            point.color
+        }
+        MeshGradient(
+            width: selectedObject.width,
+            height: selectedObject.height,
+            points: sPoints,
+            colors: colors,
+            background: selectedObject.withBackground ? selectedObject.backgroundColor : .clear
+        )
+        .shadow(color: selectedObject.withShadow ? selectedObject.shadow : .clear, radius: 25, x: -10, y: 10)
+    }
+}
 #Preview {
     MeshCreatorView()
         .environment(AppState(selectedObject: MeshObject.sample))
