@@ -32,6 +32,9 @@ class MeshObject: Identifiable {
         case diamond
         case star
         case hexagon
+        case drop
+        case octagon
+        case seal
     }
     
     static var pointColors: [Color] {
@@ -53,6 +56,7 @@ class MeshObject: Identifiable {
     var withShadow: Bool = false
     var withBackground: Bool = false
     var backgroundColor: Color = .white
+    var smoothColors: Bool = true
     
     init(name: String, width: Int, height: Int, meshPoints: [[MeshPoint]]) {
         self.name = name
@@ -101,11 +105,14 @@ MeshGradient(
             code +=
 """
 ,
-    background: Color(hex: \"\(backgroundColor.toHexString() ?? "??")\")!
+    background: Color(hex: \"\(backgroundColor.toHexString() ?? "??")\")!,
+    smoothsColors: "\(smoothColors)"
 )
 """
         } else {
             code += """
+     ,
+    smoothsColors: \(smoothColors)
 )
 """
         }

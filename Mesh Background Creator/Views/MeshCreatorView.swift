@@ -159,7 +159,8 @@ struct MyGradientView: View {
             height: selectedObject.height,
             points: sPoints,
             colors: colors,
-            background: selectedObject.withBackground ? selectedObject.backgroundColor : .clear
+            background: selectedObject.withBackground ? selectedObject.backgroundColor : .clear,
+            smoothsColors: selectedObject.smoothColors
         )
         .shadow(color: selectedObject.withShadow ? selectedObject.shadow : .clear, radius: 25, x: -10, y: 10)
     }

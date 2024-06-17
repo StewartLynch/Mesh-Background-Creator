@@ -29,7 +29,7 @@ struct InspectorView: View {
                 VStack{
                     LabeledContent("Width:") {
                         Menu("\(width)") {
-                            ForEach(3..<6) { index in
+                            ForEach(3..<10) { index in
                                 Button("\(index)") {
                                     if index != selectedObject.width {
                                         appState.tempObject = selectedObject
@@ -46,7 +46,7 @@ struct InspectorView: View {
                     .frame(width: 100)
                     LabeledContent("Height") {
                         Menu("\(height)") {
-                            ForEach(3..<6) { index in
+                            ForEach(3..<10) { index in
                                 Button("\(index)") {
                                     if index != selectedObject.height {
                                         appState.tempObject = selectedObject
@@ -76,7 +76,9 @@ struct InspectorView: View {
                     }
                 }
             }
-        .padding()
+            .padding()
+            Toggle("Smooth Colors", isOn: $selectedObject.smoothColors)
+                .padding(.horizontal)
             if selectedObject.meshPoints.count > 0 {
                 List(0..<selectedObject.height, id: \.self) { row in
                     ForEach(0..<selectedObject.width, id: \.self) { col in
