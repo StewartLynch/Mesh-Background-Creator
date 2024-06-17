@@ -1,6 +1,7 @@
 //
 // ----------------------------------------------
-// Original project: ColorExtensionTesting-2
+// Original project: PlatformColorAndColorExtension
+// https://github.com/StewartLynch/PlatformColorAndColorExtensions
 // by  Stewart Lynch on 2024-06-13
 //
 // Follow me on Mastodon: @StewartLynch@iosdev.space
@@ -42,11 +43,11 @@ extension Color {
         #endif
     }
     
-    func luminance() -> CGFloat {
+    var luminance: CGFloat {
             #if os(macOS)
-            return NSColor(self).luminance()
+            return NSColor(self).luminance
             #else
-            return UIColor(self).luminance()
+            return UIColor(self).luminance
             #endif
         }
         

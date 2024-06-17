@@ -20,10 +20,11 @@ struct CodeView: View {
     let code: String
     var body: some View {
         NavigationStack {
-            Text(code)
-                .textSelection(.enabled)
-                .padding()
-                .navigationTitle("MeshGradientView Code")
+            ScrollView{
+                Text(code)
+            }
+            .contentMargins(50, for: .scrollContent)
+                .navigationTitle("Code")
                 .toolbar {
                     ToolbarItem(placement: .confirmationAction) {
                         Button {

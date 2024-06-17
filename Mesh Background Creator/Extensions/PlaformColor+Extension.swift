@@ -1,6 +1,7 @@
 //
 // ----------------------------------------------
-// Original project: ColorExtensionTesting-2
+// Original project: PlatformColorAndColorExtension
+// https://github.com/StewartLynch/PlatformColorAndColorExtensions
 // by  Stewart Lynch on 2024-06-13
 //
 // Follow me on Mastodon: @StewartLynch@iosdev.space
@@ -74,7 +75,7 @@ extension PlatformColor {
     }
     
     // Calculate luminance of the color
-    func luminance() -> CGFloat {
+    var luminance: CGFloat {
         guard let components = self.cgColor.components else {
             return 0
         }
@@ -88,7 +89,7 @@ extension PlatformColor {
     
     // Computed property to get adapted text color based on luminance
     var adaptedTextColor: PlatformColor {
-        return luminance() > 0.5 ? PlatformColor.black : PlatformColor.white
+        return luminance > 0.5 ? PlatformColor.black : PlatformColor.white
     }
 
 }

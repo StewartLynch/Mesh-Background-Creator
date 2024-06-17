@@ -12,73 +12,66 @@
 // ----------------------------------------------
 // Copyright © 2024 CreaTECH Solutions. All rights reserved.
 
-
 import SwiftUI
 
 struct InspectorView: View {
-        @Environment(AppState.self) private var appState
+    @Environment(AppState.self) private var appState
     @Bindable var selectedObject: MeshObject
     @State private var width:Int = 1
     @State private var height: Int = 1
     var body: some View {
         VStack(alignment: .leading) {
-            Text(selectedObject.name)
+            Text("Configuration")
                 .font(.title)
                 .frame(maxWidth: .infinity, alignment: .center)
-            HStack{
-                VStack{
-                    LabeledContent("Width:") {
-                        Menu("\(width)") {
-                            ForEach(3..<10) { index in
-                                Button("\(index)") {
-                                    if index != selectedObject.width {
-                                        appState.tempObject = selectedObject
-                                        let newObject = MeshObject(name: selectedObject.name, width: index, height: selectedObject.height, meshPoints: [])
-                                        newObject.meshPoints = newObject.generateSampleMeshPoints()
-                                        appState.selectedObject = nil
-                                        appState.selectedObject = newObject
-                                        width = index
-                                    }
+            GroupBox {
+                LabeledContent("Width:") {
+                    Menu("\(width)") {
+                        ForEach(3..<10) { index in
+                            Button("\(index)") {
+                                if index != selectedObject.width {
+                                    appState.tempObject = selectedObject
+                                    let newObject = MeshObject(name: selectedObject.name, width: index, height: selectedObject.height, meshPoints: [])
+                                    newObject.meshPoints = newObject.generateSampleMeshPoints()
+                                    appState.selectedObject = nil
+                                    appState.selectedObject = newObject
+                                    width = index
                                 }
                             }
                         }
                     }
-                    .frame(width: 100)
-                    LabeledContent("Height") {
-                        Menu("\(height)") {
-                            ForEach(3..<10) { index in
-                                Button("\(index)") {
-                                    if index != selectedObject.height {
-                                        appState.tempObject = selectedObject
-                                        let newObject = MeshObject(name: selectedObject.name, width: selectedObject.width, height: index, meshPoints: [])
-                                        newObject.meshPoints = newObject.generateSampleMeshPoints()
-                                        appState.selectedObject = nil
-                                        appState.selectedObject = newObject
-                                        height = index
-                                    }
-                                }
-                            }
-                        }
-                    }
-                    .frame(width: 100)
                 }
-                Spacer()
-                VStack {
+                LabeledContent("Height") {
+                    Menu("\(height)") {
+                        ForEach(3..<10) { index in
+                            Button("\(index)") {
+                                if index != selectedObject.height {
+                                    appState.tempObject = selectedObject
+                                    let newObject = MeshObject(name: selectedObject.name, width: selectedObject.width, height: index, meshPoints: [])
+                                    newObject.meshPoints = newObject.generateSampleMeshPoints()
+                                    appState.selectedObject = nil
+                                    appState.selectedObject = newObject
+                                    height = index
+                                }
+                            }
+                        }
+                    }
+                }
+                if !selectedObject.withShadow {
                     Toggle("With Background", isOn: $selectedObject.withBackground)
                     if selectedObject.withBackground {
                         ColorPicker("Color", selection: $selectedObject.backgroundColor)
                     }
-                    if !selectedObject.withBackground {
-                        GroupBox {
-                            Toggle("Show Shadow", isOn: $selectedObject.withShadow)
-                            ColorPicker("Color", selection: $selectedObject.shadow)
-                        }
+                }
+                if !selectedObject.withBackground {
+                    Toggle("Show Shadow", isOn: $selectedObject.withShadow)
+                    if selectedObject.withShadow {
+                        ColorPicker("Color", selection: $selectedObject.shadow)
                     }
                 }
+                Toggle("Smooth Colors", isOn: $selectedObject.smoothColors)
             }
             .padding()
-            Toggle("Smooth Colors", isOn: $selectedObject.smoothColors)
-                .padding(.horizontal)
             if selectedObject.meshPoints.count > 0 {
                 List(0..<selectedObject.height, id: \.self) { row in
                     ForEach(0..<selectedObject.width, id: \.self) { col in
@@ -100,16 +93,18 @@ struct InspectorView: View {
                             }
                         }
                     }
+                    .listRowSeparator(.hidden)
                     Divider()
                 }
+#if os(iOS)
+                .listStyle(.plain)
+#endif
             }
-            
         }
         .onAppear {
             width = selectedObject.width
             height = selectedObject.height
         }
-        
     }
 }
 

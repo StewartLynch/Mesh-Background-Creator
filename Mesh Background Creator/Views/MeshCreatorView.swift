@@ -16,28 +16,61 @@
 
 
 import SwiftUI
+#if os(macOS)
 import AppKit
+#else
+import UIKit
+#endif
+
 import UniformTypeIdentifiers
 struct MeshCreatorView: View {
     @State private var selectedDevice = Device.all.first!
-    
-    @State private var inspectorIsShown = true
+    @State private var viewSize: CGSize = .zero
+    @State private var inspectorIsShown = false
     @Environment(AppState.self) private var appState
     @Environment(\.colorScheme) var mode
+    var isCompressed: Bool {
+        viewSize.width < 400
+    }
     var body: some View {
         if let selectedObject = appState.selectedObject {
             NavigationStack {
                 VStack {
-                    Menu(selectedDevice.name) {
-                        ForEach(Device.all) { device in
-                            Button(device.name) {
-                                selectedDevice = device
+                    HStack {
+                        Spacer()
+                        VStack {
+                            Menu(selectedDevice.name) {
+                                ForEach(isCompressed ? Device.iPhone : Device.all) { device in
+                                    Button(device.name) {
+                                        withAnimation {
+                                            selectedDevice = device
+                                        }
+                                    }
+                                }
+                            }
+                            .frame(width: 150)
+                            .padding()
+                            .buttonStyle(.bordered)
+                            Toggle("Show Points", isOn: Bindable(appState).showPoints)
+                                .frame(width: 150)
+                                .font(.callout)
+                        }
+                        
+                        if selectedDevice.name == "Custom" {
+                            GroupBox {
+                                LabeledContent("Width:") {
+                                    Slider(value: $selectedDevice.width, in: 100...viewSize.width - 20)
+                                }
+                                LabeledContent("Height:") {
+                                    Slider(value: $selectedDevice.height, in: 100...viewSize.height - 20)
+                                }
                             }
                         }
+                        Spacer()
                     }
-                    .frame(width: 200)
-                    .padding()
-                    Toggle("Display Points", isOn: Bindable(appState).showPoints)
+                    
+                   
+
                     GeometryReader { geometry in
                         ZStack {
                             // Rectangle
@@ -64,6 +97,9 @@ struct MeshCreatorView: View {
                             }
                         }
                         .frame(maxWidth: .infinity, maxHeight: .infinity)
+                        .readSize {
+                            viewSize = $0
+                        }
                     }
                 }
                 .toolbar(content: {
@@ -72,18 +108,21 @@ struct MeshCreatorView: View {
                     }
                     .sheet(isPresented: Bindable(appState).showCode) {
                         CodeView(code: selectedObject.code)
+                        Button("Save Image", systemImage: "square.and.arrow.down") {
+                            Task {
                     }
-                    Button("Save Image", systemImage: "square.and.arrow.down") {
-                        Task {
+#if os(macOS)
                             if let url = savePanel(for: .jpeg) {
                                 save(with: .jpeg, at: url)
                             }
+#else
+#endif
                         }
                     }
                     Button {
                         inspectorIsShown.toggle()
                     } label: {
-                        Label(inspectorIsShown ? "Hide Inspector" : "Show Inspector", systemImage: "sidebar.trailing")
+                        Label(inspectorIsShown ? "Hide Inspector" : "Show Inspector", systemImage: isCompressed ? "gear" : "sidebar.trailing")
                     }
                 })
                 .inspector(isPresented: $inspectorIsShown) {
@@ -96,17 +135,25 @@ struct MeshCreatorView: View {
                 if newValue {
                     appState.export = false
                     Task {
+#if os(macOS)
                         if let url = savePanel(for: .jpeg) {
                             save(with: .jpeg, at: url)
                         }
+#else
+#endif
                     }
+
                 }
+            }
+            .onChange(of: isCompressed) { oldValue, newValue in
+                inspectorIsShown = !isCompressed
             }
         } else {
             Text("Pick it")
         }
     }
     
+#if os(macOS)
     private func savePanel(for type: UTType) -> URL? {
         let savePanel = NSSavePanel()
         savePanel.allowedContentTypes = [type]
@@ -137,6 +184,9 @@ struct MeshCreatorView: View {
 
         try? imageData?.write(to: url)
     }
+#else
+    
+#endif
 }
 
 enum ContentType {
@@ -168,7 +218,9 @@ struct MyGradientView: View {
 #Preview {
     MeshCreatorView()
         .environment(AppState(selectedObject: MeshObject.sample))
+#if os(macOS)
         .frame(
             width: 700, height: 600)
+#endif
 }
 
