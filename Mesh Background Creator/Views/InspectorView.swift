@@ -25,38 +25,41 @@ struct InspectorView: View {
                 .font(.title)
                 .frame(maxWidth: .infinity, alignment: .center)
             GroupBox {
-                LabeledContent("Width:") {
-                    Menu("\(width)") {
-                        ForEach(3..<10) { index in
-                            Button("\(index)") {
-                                if index != selectedObject.width {
-                                    appState.tempObject = selectedObject
-                                    let newObject = MeshObject(name: selectedObject.name, width: index, height: selectedObject.height, meshPoints: [])
-                                    newObject.meshPoints = newObject.generateSampleMeshPoints()
-                                    appState.selectedObject = nil
-                                    appState.selectedObject = newObject
-                                    width = index
+                Group {
+                    LabeledContent("Width:") {
+                        Menu("\(width)") {
+                            ForEach(3..<10) { index in
+                                Button("\(index)") {
+                                    if index != selectedObject.width {
+                                        appState.tempObject = selectedObject
+                                        let newObject = MeshObject(name: selectedObject.name, width: index, height: selectedObject.height, meshPoints: [])
+                                        newObject.meshPoints = newObject.generateSampleMeshPoints()
+                                        appState.selectedObject = nil
+                                        appState.selectedObject = newObject
+                                        width = index
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    LabeledContent("Height") {
+                        Menu("\(height)") {
+                            ForEach(3..<10) { index in
+                                Button("\(index)") {
+                                    if index != selectedObject.height {
+                                        appState.tempObject = selectedObject
+                                        let newObject = MeshObject(name: selectedObject.name, width: selectedObject.width, height: index, meshPoints: [])
+                                        newObject.meshPoints = newObject.generateSampleMeshPoints()
+                                        appState.selectedObject = nil
+                                        appState.selectedObject = newObject
+                                        height = index
+                                    }
                                 }
                             }
                         }
                     }
                 }
-                LabeledContent("Height") {
-                    Menu("\(height)") {
-                        ForEach(3..<10) { index in
-                            Button("\(index)") {
-                                if index != selectedObject.height {
-                                    appState.tempObject = selectedObject
-                                    let newObject = MeshObject(name: selectedObject.name, width: selectedObject.width, height: index, meshPoints: [])
-                                    newObject.meshPoints = newObject.generateSampleMeshPoints()
-                                    appState.selectedObject = nil
-                                    appState.selectedObject = newObject
-                                    height = index
-                                }
-                            }
-                        }
-                    }
-                }
+                .frame(width: 100, alignment: .center)
                 if !selectedObject.withShadow {
                     Toggle("With Background", isOn: $selectedObject.withBackground)
                     if selectedObject.withBackground {
@@ -71,6 +74,7 @@ struct InspectorView: View {
                 }
                 Toggle("Smooth Colors", isOn: $selectedObject.smoothColors)
             }
+            .frame(maxWidth: .infinity, alignment: .center)
             .padding()
             if selectedObject.meshPoints.count > 0 {
                 List(0..<selectedObject.height, id: \.self) { row in
