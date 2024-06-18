@@ -34,7 +34,7 @@ struct MeshCreatorView: View {
         viewSize.width < 400
     }
     var body: some View {
-        if let selectedObject = appState.selectedObject {
+        let selectedObject = appState.selectedObject
             NavigationStack {
                 VStack {
                     HStack {
@@ -70,7 +70,6 @@ struct MeshCreatorView: View {
                         Spacer()
                     }
                     
-                   
 
                     GeometryReader { geometry in
                         ZStack {
@@ -119,14 +118,12 @@ struct MeshCreatorView: View {
                         }
                     }
 #else
-                    let gView = MyGradientView(selectedObject: appState.selectedObject!)
-//                    refresh = UUID()
-                    
+                    let gView = MyGradientView(selectedObject: appState.selectedObject)
                     if  let renderedImage = gView.renderedImage{
                         ShareLink("Share Image as Desktop",
                                   item: renderedImage,
                                   subject: Text("MeshGradient Image"),
-                                  message: Text("Dektop Image"),
+                                  message: Text("Desktop Image"),
                                   preview: SharePreview("Desktop Image", image: renderedImage))
                     }
 #endif
@@ -150,7 +147,6 @@ struct MeshCreatorView: View {
                         if let url = savePanel(for: .jpeg) {
                             save(with: .jpeg, at: url)
                         }
-#else
 #endif
                     }
 
@@ -159,9 +155,6 @@ struct MeshCreatorView: View {
             .onChange(of: isCompressed) { oldValue, newValue in
                 inspectorIsShown = !isCompressed
             }
-        } else {
-            Text("Pick it")
-        }
     }
     
 #if os(macOS)
@@ -191,8 +184,6 @@ struct MeshCreatorView: View {
 
         try? imageData?.write(to: url)
     }
-#else
-    
 #endif
 }
 
@@ -222,12 +213,16 @@ struct MyGradientView: View {
     }
 #endif
     var body: some View {
-        let points = selectedObject.meshPoints.flatMap { $0 }.map {$0.point}
-        let sPoints:[SIMD2<Float>] = points.map { point in
+        var points: [MPoint] {
+            selectedObject.meshPoints.flatMap { $0 }.map {$0.point}
+        }
+        var sPoints:[SIMD2<Float>]  { points.map { point in
                 .init(Float(point.xCoord), Float(point.yCoord))
         }
-        let colors: [Color] = points.map { point in
+        }
+        var colors: [Color] { points.map { point in
             point.color
+        }
         }
         MeshGradient(
             width: selectedObject.width,
@@ -242,7 +237,7 @@ struct MyGradientView: View {
 }
 #Preview {
     MeshCreatorView()
-        .environment(AppState(selectedObject: MeshObject.sample))
+        .environment(AppState())
 #if os(macOS)
         .frame(
             width: 700, height: 600)

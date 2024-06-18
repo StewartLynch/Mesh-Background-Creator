@@ -35,7 +35,6 @@ struct InspectorView: View {
                                         appState.tempObject = selectedObject
                                         let newObject = MeshObject(name: selectedObject.name, width: index, height: selectedObject.height, meshPoints: [])
                                         newObject.meshPoints = newObject.generateSampleMeshPoints()
-                                        appState.selectedObject = nil
                                         appState.selectedObject = newObject
                                         width = index
                                     }
@@ -51,7 +50,6 @@ struct InspectorView: View {
                                         appState.tempObject = selectedObject
                                         let newObject = MeshObject(name: selectedObject.name, width: selectedObject.width, height: index, meshPoints: [])
                                         newObject.meshPoints = newObject.generateSampleMeshPoints()
-                                        appState.selectedObject = nil
                                         appState.selectedObject = newObject
                                         height = index
                                     }

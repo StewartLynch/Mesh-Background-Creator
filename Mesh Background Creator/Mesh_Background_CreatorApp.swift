@@ -17,7 +17,7 @@ import SwiftUI
 
 @main
 struct Mesh_Background_CreatorApp: App {
-    @State private var appState = AppState(selectedObject: MeshObject.sample)
+    @State private var appState = AppState()
     var body: some Scene {
         WindowGroup {
             MeshCreatorView()

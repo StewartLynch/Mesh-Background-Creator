@@ -16,6 +16,7 @@
 import SwiftUI
 
 struct PointView: View {
+    @Environment(AppState.self) var appState
     let index: Int
     let selectedDevice:Device
     let size: CGSize
@@ -42,6 +43,7 @@ struct PointView: View {
                     
                     meshPoint.xCoord = newX
                     meshPoint.yCoord = newY
+                    appState.refreshView.toggle()
                 }
             )
     }

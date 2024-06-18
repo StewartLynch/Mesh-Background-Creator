@@ -16,17 +16,12 @@
 import Foundation
 @Observable
 class AppState {
-    
-    var meshObjects: [MeshObject] = [MeshObject.sample]
-    var selectedObject: MeshObject?
+
+    var selectedObject: MeshObject = MeshObject.sample
     var tempObject: MeshObject = MeshObject.sample
     var selectedDevice = Device.all.first!
     var showPoints = true
     var showCode = false
     var export = false
-    init(selectedObject: MeshObject?) {
-        self.selectedObject = selectedObject
-    }
-    
-    
+    var refreshView = false
 }
