@@ -31,9 +31,16 @@ struct MeshCreatorView: View {
     @State var shareSheetItems: [Any] = []
     @State private var showShareSheet = false
     @Environment(AppState.self) private var appState
-    @Environment(\.colorScheme) var mode
+    @State private var background = Color.white
+    @State private var saveAlert:ErrorAlert?
+    @Environment(\.colorScheme) var colorScheme
     var isCompressed: Bool {
         viewSize.width < 400
+    }
+    
+    enum ErrorAlert {
+        case saveSuccess(String)
+        case saveFail(String)
     }
     var body: some View {
         let selectedObject = appState.selectedObject
@@ -51,13 +58,12 @@ struct MeshCreatorView: View {
                                     }
                                 }
                             }
-                            .frame(width: 150)
                             .padding()
                             .buttonStyle(.bordered)
                             Toggle("Show Points", isOn: Bindable(appState).showPoints)
                                 .frame(width: 150)
-                                .font(.callout)
                         }
+                        .font(.callout)
                         
                         if selectedDevice.name == "Custom" {
                             GroupBox {
@@ -71,7 +77,7 @@ struct MeshCreatorView: View {
                         }
                         Spacer()
                     }
-                    
+                    .frame(width: max(viewSize.width / 2, 380))
 
                     GeometryReader { geometry in
                         ZStack {
@@ -80,11 +86,11 @@ struct MeshCreatorView: View {
                                 .stroke(Color.primary, lineWidth: 4)
                                 .frame(width: selectedDevice.width, height: selectedDevice.height)
                                 .overlay{
-                                    MyGradientView(selectedObject: selectedObject)
+                                    
+                                    MyGradientView(selectedObject: selectedObject, background: $background)
                                         .clipShape(RoundedRectangle(cornerRadius: 30 ))
                                 }
                                 .position(x: geometry.size.width / 2, y: geometry.size.height / 2)
-                            
                             // Draggable Images
                             ForEach(0..<selectedObject.width, id: \.self) { col in
                                 ForEach(0..<selectedObject.height, id: \.self) { row in
@@ -112,7 +118,7 @@ struct MeshCreatorView: View {
                         CodeView(code: selectedObject.code)
                     }
 #if os(macOS)
-                    Button("Save Image", systemImage: "square.and.arrow.down") {
+                    Button("Save Image", systemImage: "photo.artframe") {
                         Task {
                             if let url = savePanel(for: .jpeg) {
                                 save(with: .jpeg, at: url)
@@ -121,15 +127,28 @@ struct MeshCreatorView: View {
                     }
 #else
                     Button {
-                        if let image = MyGradientView(selectedObject: selectedObject).renderedUIImage {
+                        if let image = MyGradientView(selectedObject: selectedObject, background: $background).renderedUIImage {
+                            
                             saveImageToPhotos(image: image)
                         }
                     } label: {
-                        Image(systemName: "square.and.arrow.up")
+                        Image(systemName: "photo.artframe")
                     }
-                    .sheet(isPresented: $showShareSheet) {
-                        ShareSheet(activityItems: shareSheetItems)
-                    }
+                    .alert("Desktop Image", isPresented: .constant(saveAlert != nil)) {
+                                    Button("OK") {
+                                        saveAlert = nil
+                                    }
+                                } message: {
+                                    switch saveAlert {
+                                    case .saveSuccess(let string):
+                                        Text(string)
+                                    case .saveFail(let string):
+                                        Text(string)
+                                    case nil:
+                                        Text("")
+                                    }
+                                }
+
                     
 #endif
                     Button {
@@ -159,6 +178,9 @@ struct MeshCreatorView: View {
             }
             .onChange(of: isCompressed) { oldValue, newValue in
                 inspectorIsShown = !isCompressed
+            }
+            .onChange(of: colorScheme) { oldValue, newValue in
+                background = colorScheme == .dark ? .black : .white
             }
     }
     
@@ -200,8 +222,10 @@ struct MeshCreatorView: View {
                 PHAssetChangeRequest.creationRequestForAsset(from: image)
             }) { success, error in
                 if success {
+                    saveAlert = .saveSuccess("Successfully saved image to Photos.")
                     print("Successfully saved image to Photos.")
                 } else if let error = error {
+                    saveAlert = .saveFail("Error saving image to Photos: \(error.localizedDescription)")
                     print("Error saving image to Photos: \(error.localizedDescription)")
                 }
             }

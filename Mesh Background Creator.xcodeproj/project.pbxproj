@@ -32,6 +32,7 @@
 		BB929F592C20D4FB00C95E99 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		BBA246042C2126BC008C622F /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		BBA2464B2C214F4D008C622F /* ShareSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareSheet.swift; sourceTree = "<group>"; };
+		BBF271F22C22111200E3E100 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -112,6 +113,7 @@
 		BB5954472C1911EF003838AB = {
 			isa = PBXGroup;
 			children = (
+				BBF271F22C22111200E3E100 /* README.md */,
 				BB5954522C1911EF003838AB /* Mesh Background Creator */,
 				BB929F512C20D4FA00C95E99 /* MeshGradient Creator */,
 				BB5954512C1911EF003838AB /* Products */,

@@ -17,6 +17,7 @@ import SwiftUI
 
 struct MyGradientView: View {
     @Bindable var selectedObject: MeshObject
+    @Binding var background: Color
     var desktopView: some View {
         self.frame(width: 1920, height: 1080)
     }
@@ -25,17 +26,9 @@ struct MyGradientView: View {
         return ImageRenderer(content: desktopView).cgImage
     }
 #else
-    var renderedImage: Image? {
-        let renderer = ImageRenderer(content: desktopView)
-        renderer.scale = 3
-        if let image = renderer.cgImage {
-            return Image(decorative: image, scale: 1.0)
-        } else {
-            return nil
-        }
-    }
     
     var renderedUIImage: UIImage? {
+        let desktopView =  self.frame(width: 1920, height: 1080).background(background)
         let renderer = ImageRenderer(content: desktopView)
         renderer.scale = 3
         if let image = renderer.cgImage {
@@ -67,4 +60,9 @@ struct MyGradientView: View {
         )
         .shadow(color: selectedObject.withShadow ? selectedObject.shadow : .clear, radius: 25, x: -10, y: 10)
     }
+}
+
+#Preview {
+    MyGradientView(selectedObject: MeshObject.sample, background: .constant(.white))
+    
 }
