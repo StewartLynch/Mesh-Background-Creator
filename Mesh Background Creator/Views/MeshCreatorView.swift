@@ -27,6 +27,7 @@ struct MeshCreatorView: View {
     @State private var selectedDevice = Device.all.first!
     @State private var viewSize: CGSize = .zero
     @State private var inspectorIsShown = false
+    
     @Environment(AppState.self) private var appState
     @Environment(\.colorScheme) var mode
     var isCompressed: Bool {
@@ -118,6 +119,16 @@ struct MeshCreatorView: View {
                         }
                     }
 #else
+                    let gView = MyGradientView(selectedObject: appState.selectedObject!)
+//                    refresh = UUID()
+                    
+                    if  let renderedImage = gView.renderedImage{
+                        ShareLink("Share Image as Desktop",
+                                  item: renderedImage,
+                                  subject: Text("MeshGradient Image"),
+                                  message: Text("Dektop Image"),
+                                  preview: SharePreview("Desktop Image", image: renderedImage))
+                    }
 #endif
                     Button {
                         inspectorIsShown.toggle()
@@ -167,11 +178,7 @@ struct MeshCreatorView: View {
     }
     
     @MainActor func save(with contentType: ContentType, at url: URL) {
-        let desktopView = MyGradientView(selectedObject: appState.selectedObject!).frame(width: 1920, height: 1080)
-        guard let cgImage = ImageRenderer(content: desktopView).cgImage else {
-            return
-        }
-
+        guard let cgImage = MyGradientView(selectedObject: appState.selectedObject!).renderedCGImage else { return }
         let image = NSImage(cgImage: cgImage, size: .init(width: 1920, height: 1080))
         guard let representation = image.tiffRepresentation else { return }
         let imageRepresentation = NSBitmapImageRep(data: representation)
@@ -195,7 +202,25 @@ enum ContentType {
 }
 
 struct MyGradientView: View {
-    let selectedObject: MeshObject
+    @Bindable var selectedObject: MeshObject
+    var desktopView: some View {
+        self.frame(width: 1920, height: 1080)
+    }
+#if os(macOS)
+    var renderedCGImage: CGImage? {
+        return ImageRenderer(content: desktopView).cgImage
+    }
+#else
+    var renderedImage: Image? {
+        let renderer = ImageRenderer(content: desktopView)
+        renderer.scale = 3
+        if let image = renderer.cgImage {
+            return Image(decorative: image, scale: 1.0)
+        } else {
+            return nil
+        }
+    }
+#endif
     var body: some View {
         let points = selectedObject.meshPoints.flatMap { $0 }.map {$0.point}
         let sPoints:[SIMD2<Float>] = points.map { point in

@@ -19,6 +19,7 @@ struct InspectorView: View {
     @Bindable var selectedObject: MeshObject
     @State private var width:Int = 1
     @State private var height: Int = 1
+    @State private var renderedImage: Image?
     var body: some View {
         VStack(alignment: .leading) {
             Text("Configuration")

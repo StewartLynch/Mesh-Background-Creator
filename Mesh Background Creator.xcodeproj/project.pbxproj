@@ -15,6 +15,7 @@
 		BB929F572C20D4FB00C95E99 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BB929F562C20D4FB00C95E99 /* Assets.xcassets */; };
 		BB929F5A2C20D4FB00C95E99 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BB929F592C20D4FB00C95E99 /* Preview Assets.xcassets */; };
 		BB929F642C20D5D300C95E99 /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB180F082C19F9C50060F6E4 /* AppState.swift */; };
+		BBA246052C2126BC008C622F /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BBA246042C2126BC008C622F /* Launch Screen.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +29,7 @@
 		BB929F522C20D4FA00C95E99 /* MeshGradient_CreatorApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeshGradient_CreatorApp.swift; sourceTree = "<group>"; };
 		BB929F562C20D4FB00C95E99 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		BB929F592C20D4FB00C95E99 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		BBA246042C2126BC008C622F /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -150,6 +152,7 @@
 				BB929F522C20D4FA00C95E99 /* MeshGradient_CreatorApp.swift */,
 				BB929F562C20D4FB00C95E99 /* Assets.xcassets */,
 				BB929F582C20D4FB00C95E99 /* Preview Content */,
+				BBA246042C2126BC008C622F /* Launch Screen.storyboard */,
 			);
 			path = "MeshGradient Creator";
 			sourceTree = "<group>";
@@ -253,6 +256,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BBA246052C2126BC008C622F /* Launch Screen.storyboard in Resources */,
 				BB929F5A2C20D4FB00C95E99 /* Preview Assets.xcassets in Resources */,
 				BB929F572C20D4FB00C95E99 /* Assets.xcassets in Resources */,
 			);
@@ -470,6 +474,7 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = "Launch Screen.storyboard";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = UIInterfaceOrientationPortrait;
 				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
@@ -501,6 +506,7 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = "Launch Screen.storyboard";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = UIInterfaceOrientationPortrait;
 				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
