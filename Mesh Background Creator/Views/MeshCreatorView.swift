@@ -22,12 +22,14 @@ import AppKit
 import UIKit
 #endif
 
+import Photos
 import UniformTypeIdentifiers
 struct MeshCreatorView: View {
     @State private var selectedDevice = Device.all.first!
     @State private var viewSize: CGSize = .zero
     @State private var inspectorIsShown = false
-    
+    @State var shareSheetItems: [Any] = []
+    @State private var showShareSheet = false
     @Environment(AppState.self) private var appState
     @Environment(\.colorScheme) var mode
     var isCompressed: Bool {
@@ -118,14 +120,17 @@ struct MeshCreatorView: View {
                         }
                     }
 #else
-                    let gView = MyGradientView(selectedObject: appState.selectedObject)
-                    if  let renderedImage = gView.renderedImage{
-                        ShareLink("Share Image as Desktop",
-                                  item: renderedImage,
-                                  subject: Text("MeshGradient Image"),
-                                  message: Text("Desktop Image"),
-                                  preview: SharePreview("Desktop Image", image: renderedImage))
+                    Button {
+                        if let image = MyGradientView(selectedObject: selectedObject).renderedUIImage {
+                            saveImageToPhotos(image: image)
+                        }
+                    } label: {
+                        Image(systemName: "square.and.arrow.up")
                     }
+                    .sheet(isPresented: $showShareSheet) {
+                        ShareSheet(activityItems: shareSheetItems)
+                    }
+                    
 #endif
                     Button {
                         inspectorIsShown.toggle()
@@ -185,6 +190,24 @@ struct MeshCreatorView: View {
         try? imageData?.write(to: url)
     }
 #endif
+    
+    #if os(iOS)
+    func saveImageToPhotos(image: UIImage) {
+        PHPhotoLibrary.requestAuthorization { status in
+            guard status == .authorized else { return }
+            
+            PHPhotoLibrary.shared().performChanges({
+                PHAssetChangeRequest.creationRequestForAsset(from: image)
+            }) { success, error in
+                if success {
+                    print("Successfully saved image to Photos.")
+                } else if let error = error {
+                    print("Error saving image to Photos: \(error.localizedDescription)")
+                }
+            }
+        }
+    } 
+    #endif
 }
 
 enum ContentType {
@@ -192,49 +215,6 @@ enum ContentType {
     case png
 }
 
-struct MyGradientView: View {
-    @Bindable var selectedObject: MeshObject
-    var desktopView: some View {
-        self.frame(width: 1920, height: 1080)
-    }
-#if os(macOS)
-    var renderedCGImage: CGImage? {
-        return ImageRenderer(content: desktopView).cgImage
-    }
-#else
-    var renderedImage: Image? {
-        let renderer = ImageRenderer(content: desktopView)
-        renderer.scale = 3
-        if let image = renderer.cgImage {
-            return Image(decorative: image, scale: 1.0)
-        } else {
-            return nil
-        }
-    }
-#endif
-    var body: some View {
-        var points: [MPoint] {
-            selectedObject.meshPoints.flatMap { $0 }.map {$0.point}
-        }
-        var sPoints:[SIMD2<Float>]  { points.map { point in
-                .init(Float(point.xCoord), Float(point.yCoord))
-        }
-        }
-        var colors: [Color] { points.map { point in
-            point.color
-        }
-        }
-        MeshGradient(
-            width: selectedObject.width,
-            height: selectedObject.height,
-            points: sPoints,
-            colors: colors,
-            background: selectedObject.withBackground ? selectedObject.backgroundColor : .clear,
-            smoothsColors: selectedObject.smoothColors
-        )
-        .shadow(color: selectedObject.withShadow ? selectedObject.shadow : .clear, radius: 25, x: -10, y: 10)
-    }
-}
 #Preview {
     MeshCreatorView()
         .environment(AppState())

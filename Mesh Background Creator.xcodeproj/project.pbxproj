@@ -16,6 +16,7 @@
 		BB929F5A2C20D4FB00C95E99 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BB929F592C20D4FB00C95E99 /* Preview Assets.xcassets */; };
 		BB929F642C20D5D300C95E99 /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB180F082C19F9C50060F6E4 /* AppState.swift */; };
 		BBA246052C2126BC008C622F /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BBA246042C2126BC008C622F /* Launch Screen.storyboard */; };
+		BBA2464C2C214F4D008C622F /* ShareSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBA2464B2C214F4D008C622F /* ShareSheet.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +31,7 @@
 		BB929F562C20D4FB00C95E99 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		BB929F592C20D4FB00C95E99 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		BBA246042C2126BC008C622F /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
+		BBA2464B2C214F4D008C622F /* ShareSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareSheet.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -40,6 +42,7 @@
 				InspectorView.swift,
 				Menus.swift,
 				MeshCreatorView.swift,
+				MyGradientView.swift,
 				PointView.swift,
 			);
 			target = BB59544F2C1911EF003838AB /* Mesh Background Creator */;
@@ -58,6 +61,7 @@
 				CodeView.swift,
 				InspectorView.swift,
 				MeshCreatorView.swift,
+				MyGradientView.swift,
 				PointView.swift,
 			);
 			target = BB929F4F2C20D4FA00C95E99 /* MeshGradient Creator */;
@@ -150,6 +154,7 @@
 			isa = PBXGroup;
 			children = (
 				BB929F522C20D4FA00C95E99 /* MeshGradient_CreatorApp.swift */,
+				BBA2464B2C214F4D008C622F /* ShareSheet.swift */,
 				BB929F562C20D4FB00C95E99 /* Assets.xcassets */,
 				BB929F582C20D4FB00C95E99 /* Preview Content */,
 				BBA246042C2126BC008C622F /* Launch Screen.storyboard */,
@@ -279,6 +284,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BB929F642C20D5D300C95E99 /* AppState.swift in Sources */,
+				BBA2464C2C214F4D008C622F /* ShareSheet.swift in Sources */,
 				BB929F532C20D4FA00C95E99 /* MeshGradient_CreatorApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -420,6 +426,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.developer-tools";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "We need acces to save the image to your photo library";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
@@ -448,6 +455,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.developer-tools";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "We need acces to save the image to your photo library";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
@@ -471,6 +479,8 @@
 				DEVELOPMENT_TEAM = RKV4UP49S6;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "We need acces to save the image to your photo library";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "Need access to your photo library to save photos";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -503,6 +513,8 @@
 				DEVELOPMENT_TEAM = RKV4UP49S6;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "We need acces to save the image to your photo library";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "Need access to your photo library to save photos";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
