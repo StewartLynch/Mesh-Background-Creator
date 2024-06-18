@@ -182,6 +182,9 @@ struct MeshCreatorView: View {
             .onChange(of: colorScheme) { oldValue, newValue in
                 background = colorScheme == .dark ? .black : .white
             }
+            .onAppear {
+                background = colorScheme == .dark ? .black : .white
+            }
     }
     
 #if os(macOS)
@@ -198,7 +201,7 @@ struct MeshCreatorView: View {
     }
     
     @MainActor func save(with contentType: ContentType, at url: URL) {
-        guard let cgImage = MyGradientView(selectedObject: appState.selectedObject!).renderedCGImage else { return }
+        guard let cgImage = MyGradientView(selectedObject: appState.selectedObject, background: $background).renderedCGImage else { return }
         let image = NSImage(cgImage: cgImage, size: .init(width: 1920, height: 1080))
         guard let representation = image.tiffRepresentation else { return }
         let imageRepresentation = NSBitmapImageRep(data: representation)

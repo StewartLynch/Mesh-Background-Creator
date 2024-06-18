@@ -18,11 +18,11 @@ import SwiftUI
 struct MyGradientView: View {
     @Bindable var selectedObject: MeshObject
     @Binding var background: Color
-    var desktopView: some View {
-        self.frame(width: 1920, height: 1080)
-    }
+    
 #if os(macOS)
+
     var renderedCGImage: CGImage? {
+        let desktopView = self.frame(width: 1920, height: 1080).background(background)
         return ImageRenderer(content: desktopView).cgImage
     }
 #else
