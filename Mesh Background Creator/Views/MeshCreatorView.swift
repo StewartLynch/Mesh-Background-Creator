@@ -108,17 +108,17 @@ struct MeshCreatorView: View {
                     }
                     .sheet(isPresented: Bindable(appState).showCode) {
                         CodeView(code: selectedObject.code)
-                        Button("Save Image", systemImage: "square.and.arrow.down") {
-                            Task {
                     }
 #if os(macOS)
+                    Button("Save Image", systemImage: "square.and.arrow.down") {
+                        Task {
                             if let url = savePanel(for: .jpeg) {
                                 save(with: .jpeg, at: url)
                             }
-#else
-#endif
                         }
                     }
+#else
+#endif
                     Button {
                         inspectorIsShown.toggle()
                     } label: {
