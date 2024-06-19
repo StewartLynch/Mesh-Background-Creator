@@ -24,29 +24,29 @@ struct CodeView: View {
                 Text(code)
             }
             .contentMargins(50, for: .scrollContent)
-                .navigationTitle("Code")
-                .toolbar {
-                    ToolbarItem(placement: .confirmationAction) {
-                        Button {
-    #if os(macOS)
-                            let pasteboard = NSPasteboard.general
-                            pasteboard.declareTypes([.string], owner: nil)
-                            pasteboard.setString(code, forType: .string)
-    #else
-                            let pasteboard = UIPasteboard.general
-                            pasteboard.string = code
-    #endif
-                            dismiss()
-                        } label: {
-                            Image(systemName: "doc.on.doc.fill")
-                        }
-                    }
-                    ToolbarItem(placement: .cancellationAction) {
-                        Button("Cancel", role: .cancel) {
-                            dismiss()
-                        }
+            .navigationTitle("Code")
+            .toolbar {
+                ToolbarItem(placement: .confirmationAction) {
+                    Button {
+#if os(macOS)
+                        let pasteboard = NSPasteboard.general
+                        pasteboard.declareTypes([.string], owner: nil)
+                        pasteboard.setString(code, forType: .string)
+#else
+                        let pasteboard = UIPasteboard.general
+                        pasteboard.string = code
+#endif
+                        dismiss()
+                    } label: {
+                        Image(systemName: "doc.on.doc.fill")
                     }
                 }
+                ToolbarItem(placement: .cancellationAction) {
+                    Button("Cancel", role: .cancel) {
+                        dismiss()
+                    }
+                }
+            }
         }
     }
 }

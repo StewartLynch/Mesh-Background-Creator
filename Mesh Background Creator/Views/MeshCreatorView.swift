@@ -44,147 +44,147 @@ struct MeshCreatorView: View {
     }
     var body: some View {
         let selectedObject = appState.selectedObject
-            NavigationStack {
-                VStack {
-                    HStack {
-                        Spacer()
-                        VStack {
-                            Menu(selectedDevice.name) {
-                                ForEach(isCompressed ? Device.iPhone : Device.all) { device in
-                                    Button(device.name) {
-                                        withAnimation {
-                                            selectedDevice = device
-                                        }
+        NavigationStack {
+            VStack {
+                HStack {
+                    Spacer()
+                    VStack {
+                        Menu(selectedDevice.name) {
+                            ForEach(isCompressed ? Device.iPhone : Device.all) { device in
+                                Button(device.name) {
+                                    withAnimation {
+                                        selectedDevice = device
                                     }
                                 }
                             }
-                            .padding()
-                            .buttonStyle(.bordered)
-                            Toggle("Show Points", isOn: Bindable(appState).showPoints)
-                                .frame(width: 150)
                         }
-                        .font(.callout)
-                        
-                        if selectedDevice.name == "Custom" {
-                            GroupBox {
-                                LabeledContent("Width:") {
-                                    Slider(value: $selectedDevice.width, in: 100...viewSize.width - 20)
-                                }
-                                LabeledContent("Height:") {
-                                    Slider(value: $selectedDevice.height, in: 100...viewSize.height - 20)
-                                }
-                            }
-                        }
-                        Spacer()
+                        .padding()
+                        .buttonStyle(.bordered)
+                        Toggle("Show Points", isOn: Bindable(appState).showPoints)
+                            .frame(width: 150)
                     }
-                    .frame(width: max(viewSize.width / 2, 380))
-
-                    GeometryReader { geometry in
-                        ZStack {
-                            // Rectangle
-                            RoundedRectangle(cornerRadius: 30 )
-                                .stroke(Color.primary, lineWidth: 4)
-                                .frame(width: selectedDevice.width, height: selectedDevice.height)
-                                .overlay{
-                                    
-                                    MyGradientView(selectedObject: selectedObject, background: $background)
-                                        .clipShape(RoundedRectangle(cornerRadius: 30 ))
-                                }
-                                .position(x: geometry.size.width / 2, y: geometry.size.height / 2)
-                            // Draggable Images
-                            ForEach(0..<selectedObject.width, id: \.self) { col in
-                                ForEach(0..<selectedObject.height, id: \.self) { row in
-                                    PointView(
-                                        index: row,
-                                        selectedDevice: selectedDevice,
-                                        size: geometry.size, symbol: selectedObject.meshPoints[row][col].symbol.rawValue,
-                                        meshPoint: selectedObject.meshPoints[row][col].point
-                                    )
-                                    .opacity(appState.showPoints ? 1.0 : 0)
-                                }
-                            }
-                        }
-                        .frame(maxWidth: .infinity, maxHeight: .infinity)
-                        .readSize {
-                            viewSize = $0
-                        }
-                    }
-                }
-                .toolbar(content: {
-                    Button("Get Code", systemImage: "doc.text") {
-                        appState.showCode.toggle()
-                    }
-                    .sheet(isPresented: Bindable(appState).showCode) {
-                        CodeView(code: selectedObject.code)
-                    }
-#if os(macOS)
-                    Button("Save Image", systemImage: "photo.artframe") {
-                        Task {
-                            if let url = savePanel(for: .jpeg) {
-                                save(with: .jpeg, at: url)
-                            }
-                        }
-                    }
-#else
-                    Button {
-                        if let image = MyGradientView(selectedObject: selectedObject, background: $background).renderedUIImage {
-                            
-                            saveImageToPhotos(image: image)
-                        }
-                    } label: {
-                        Image(systemName: "photo.artframe")
-                    }
-                    .alert("Desktop Image", isPresented: .constant(saveAlert != nil)) {
-                                    Button("OK") {
-                                        saveAlert = nil
-                                    }
-                                } message: {
-                                    switch saveAlert {
-                                    case .saveSuccess(let string):
-                                        Text(string)
-                                    case .saveFail(let string):
-                                        Text(string)
-                                    case nil:
-                                        Text("")
-                                    }
-                                }
-
+                    .font(.callout)
                     
-#endif
-                    Button {
-                        inspectorIsShown.toggle()
-                    } label: {
-                        Label(inspectorIsShown ? "Hide Inspector" : "Show Inspector", systemImage: isCompressed ? "gear" : "sidebar.trailing")
+                    if selectedDevice.name == "Custom" {
+                        GroupBox {
+                            LabeledContent("Width:") {
+                                Slider(value: $selectedDevice.width, in: 100...viewSize.width - 20)
+                            }
+                            LabeledContent("Height:") {
+                                Slider(value: $selectedDevice.height, in: 100...viewSize.height - 20)
+                            }
+                        }
                     }
-                })
-                .inspector(isPresented: $inspectorIsShown) {
-                    InspectorView(selectedObject: selectedObject)
-                        .inspectorColumnWidth(min: 300, ideal: 300, max: 300)
+                    Spacer()
                 }
-                .navigationTitle("Mesh Creator")
+                .frame(width: max(viewSize.width / 2, 380))
+                
+                GeometryReader { geometry in
+                    ZStack {
+                        // Rectangle
+                        RoundedRectangle(cornerRadius: 30 )
+                            .stroke(Color.primary, lineWidth: 4)
+                            .frame(width: selectedDevice.width, height: selectedDevice.height)
+                            .overlay{
+                                
+                                MyGradientView(selectedObject: selectedObject, background: $background)
+                                    .clipShape(RoundedRectangle(cornerRadius: 30 ))
+                            }
+                            .position(x: geometry.size.width / 2, y: geometry.size.height / 2)
+                        // Draggable Images
+                        ForEach(0..<selectedObject.width, id: \.self) { col in
+                            ForEach(0..<selectedObject.height, id: \.self) { row in
+                                PointView(
+                                    index: row,
+                                    selectedDevice: selectedDevice,
+                                    size: geometry.size, symbol: selectedObject.meshPoints[row][col].symbol.rawValue,
+                                    meshPoint: selectedObject.meshPoints[row][col].point
+                                )
+                                .opacity(appState.showPoints ? 1.0 : 0)
+                            }
+                        }
+                    }
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+                    .readSize {
+                        viewSize = $0
+                    }
+                }
             }
-            .onChange(of: appState.export) { _, newValue in
-                if newValue {
-                    appState.export = false
-                    Task {
+            .toolbar(content: {
+                Button("Get Code", systemImage: "doc.text") {
+                    appState.showCode.toggle()
+                }
+                .sheet(isPresented: Bindable(appState).showCode) {
+                    CodeView(code: selectedObject.code)
+                }
 #if os(macOS)
+                Button("Save Image", systemImage: "photo.artframe") {
+                    Task {
                         if let url = savePanel(for: .jpeg) {
                             save(with: .jpeg, at: url)
                         }
-#endif
                     }
-
                 }
+#else
+                Button {
+                    if let image = MyGradientView(selectedObject: selectedObject, background: $background).renderedUIImage {
+                        
+                        saveImageToPhotos(image: image)
+                    }
+                } label: {
+                    Image(systemName: "photo.artframe")
+                }
+                .alert("Desktop Image", isPresented: .constant(saveAlert != nil)) {
+                    Button("OK") {
+                        saveAlert = nil
+                    }
+                } message: {
+                    switch saveAlert {
+                    case .saveSuccess(let string):
+                        Text(string)
+                    case .saveFail(let string):
+                        Text(string)
+                    case nil:
+                        Text("")
+                    }
+                }
+                
+                
+#endif
+                Button {
+                    inspectorIsShown.toggle()
+                } label: {
+                    Label(inspectorIsShown ? "Hide Inspector" : "Show Inspector", systemImage: isCompressed ? "gear" : "sidebar.trailing")
+                }
+            })
+            .inspector(isPresented: $inspectorIsShown) {
+                InspectorView(selectedObject: selectedObject)
+                    .inspectorColumnWidth(min: 300, ideal: 300, max: 300)
             }
-            .onChange(of: isCompressed) { oldValue, newValue in
-                inspectorIsShown = !isCompressed
+            .navigationTitle("Mesh Creator")
+        }
+        .onChange(of: appState.export) { _, newValue in
+            if newValue {
+                appState.export = false
+                Task {
+#if os(macOS)
+                    if let url = savePanel(for: .jpeg) {
+                        save(with: .jpeg, at: url)
+                    }
+#endif
+                }
+                
             }
-            .onChange(of: colorScheme) { oldValue, newValue in
-                background = colorScheme == .dark ? .black : .white
-            }
-            .onAppear {
-                background = colorScheme == .dark ? .black : .white
-            }
+        }
+        .onChange(of: isCompressed) { oldValue, newValue in
+            inspectorIsShown = !isCompressed
+        }
+        .onChange(of: colorScheme) { oldValue, newValue in
+            background = colorScheme == .dark ? .black : .white
+        }
+        .onAppear {
+            background = colorScheme == .dark ? .black : .white
+        }
     }
     
 #if os(macOS)
@@ -196,7 +196,7 @@ struct MeshCreatorView: View {
         savePanel.title = "Save the MeshGradient as a Desktop image"
         savePanel.message = "Choose a folder and a name to store the image."
         savePanel.nameFieldLabel = "Image file name:"
-
+        
         return savePanel.runModal() == .OK ? savePanel.url : nil
     }
     
@@ -205,18 +205,18 @@ struct MeshCreatorView: View {
         let image = NSImage(cgImage: cgImage, size: .init(width: 1920, height: 1080))
         guard let representation = image.tiffRepresentation else { return }
         let imageRepresentation = NSBitmapImageRep(data: representation)
-
+        
         let imageData: Data?
         switch contentType {
         case .jpeg: imageData = imageRepresentation?.representation(using: .jpeg, properties: [:])
         case .png: imageData = imageRepresentation?.representation(using: .png, properties: [:])
         }
-
+        
         try? imageData?.write(to: url)
     }
 #endif
     
-    #if os(iOS)
+#if os(iOS)
     func saveImageToPhotos(image: UIImage) {
         PHPhotoLibrary.requestAuthorization { status in
             guard status == .authorized else { return }
@@ -233,8 +233,8 @@ struct MeshCreatorView: View {
                 }
             }
         }
-    } 
-    #endif
+    }
+#endif
 }
 
 enum ContentType {

@@ -20,13 +20,11 @@ struct MyGradientView: View {
     @Binding var background: Color
     
 #if os(macOS)
-
     var renderedCGImage: CGImage? {
         let desktopView = self.frame(width: 1920, height: 1080).background(background)
         return ImageRenderer(content: desktopView).cgImage
     }
 #else
-    
     var renderedUIImage: UIImage? {
         let desktopView =  self.frame(width: 1920, height: 1080).background(background)
         let renderer = ImageRenderer(content: desktopView)

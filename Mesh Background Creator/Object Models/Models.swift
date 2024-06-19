@@ -36,16 +36,6 @@ class MeshObject: Identifiable {
         case octagon
         case seal
     }
-    
-    static var pointColors: [Color] {
-        [
-            .blue,
-            .red,
-            .green,
-            .orange,
-            .teal
-        ]
-    }
 
     let id = UUID()
     var name: String
@@ -64,7 +54,7 @@ class MeshObject: Identifiable {
         self.height = height
         self.meshPoints = meshPoints
     }
-    //\(String(format: "%.2f", point.xCoord))
+
     var code: String {
         var points = ""
         for row in meshPoints {
@@ -164,7 +154,6 @@ MeshGradient(
             symbols.removeFirst()
             allPoints.append(points)
         }
-
         return allPoints
     }
            

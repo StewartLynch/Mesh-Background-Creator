@@ -16,7 +16,6 @@
 		BB929F5A2C20D4FB00C95E99 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BB929F592C20D4FB00C95E99 /* Preview Assets.xcassets */; };
 		BB929F642C20D5D300C95E99 /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB180F082C19F9C50060F6E4 /* AppState.swift */; };
 		BBA246052C2126BC008C622F /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BBA246042C2126BC008C622F /* Launch Screen.storyboard */; };
-		BBA2464C2C214F4D008C622F /* ShareSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBA2464B2C214F4D008C622F /* ShareSheet.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,12 +25,11 @@
 		BB5954572C1911F0003838AB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		BB59545A2C1911F0003838AB /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		BB59545C2C1911F0003838AB /* Mesh_Background_Creator.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Mesh_Background_Creator.entitlements; sourceTree = "<group>"; };
-		BB929F502C20D4FA00C95E99 /* MeshGradient Creator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "MeshGradient Creator.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		BB929F502C20D4FA00C95E99 /* iOS-Mesh Background Creator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "iOS-Mesh Background Creator.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BB929F522C20D4FA00C95E99 /* MeshGradient_CreatorApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeshGradient_CreatorApp.swift; sourceTree = "<group>"; };
 		BB929F562C20D4FB00C95E99 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		BB929F592C20D4FB00C95E99 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		BBA246042C2126BC008C622F /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
-		BBA2464B2C214F4D008C622F /* ShareSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareSheet.swift; sourceTree = "<group>"; };
 		BBF271F22C22111200E3E100 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -65,7 +63,7 @@
 				MyGradientView.swift,
 				PointView.swift,
 			);
-			target = BB929F4F2C20D4FA00C95E99 /* MeshGradient Creator */;
+			target = BB929F4F2C20D4FA00C95E99 /* iOS-Mesh Background Creator */;
 		};
 		BB929F632C20D5BD00C95E99 /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
@@ -73,7 +71,7 @@
 				Device.swift,
 				Models.swift,
 			);
-			target = BB929F4F2C20D4FA00C95E99 /* MeshGradient Creator */;
+			target = BB929F4F2C20D4FA00C95E99 /* iOS-Mesh Background Creator */;
 		};
 		BB929F6C2C20D68E00C95E99 /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
@@ -82,7 +80,7 @@
 				"PlaformColor+Extension.swift",
 				ReadSizeViewExtension.swift,
 			);
-			target = BB929F4F2C20D4FA00C95E99 /* MeshGradient Creator */;
+			target = BB929F4F2C20D4FA00C95E99 /* iOS-Mesh Background Creator */;
 		};
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
@@ -124,7 +122,7 @@
 			isa = PBXGroup;
 			children = (
 				BB5954502C1911EF003838AB /* Mesh Background Creator.app */,
-				BB929F502C20D4FA00C95E99 /* MeshGradient Creator.app */,
+				BB929F502C20D4FA00C95E99 /* iOS-Mesh Background Creator.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -156,7 +154,6 @@
 			isa = PBXGroup;
 			children = (
 				BB929F522C20D4FA00C95E99 /* MeshGradient_CreatorApp.swift */,
-				BBA2464B2C214F4D008C622F /* ShareSheet.swift */,
 				BB929F562C20D4FB00C95E99 /* Assets.xcassets */,
 				BB929F582C20D4FB00C95E99 /* Preview Content */,
 				BBA246042C2126BC008C622F /* Launch Screen.storyboard */,
@@ -195,9 +192,9 @@
 			productReference = BB5954502C1911EF003838AB /* Mesh Background Creator.app */;
 			productType = "com.apple.product-type.application";
 		};
-		BB929F4F2C20D4FA00C95E99 /* MeshGradient Creator */ = {
+		BB929F4F2C20D4FA00C95E99 /* iOS-Mesh Background Creator */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = BB929F5D2C20D4FB00C95E99 /* Build configuration list for PBXNativeTarget "MeshGradient Creator" */;
+			buildConfigurationList = BB929F5D2C20D4FB00C95E99 /* Build configuration list for PBXNativeTarget "iOS-Mesh Background Creator" */;
 			buildPhases = (
 				BB929F4C2C20D4FA00C95E99 /* Sources */,
 				BB929F4D2C20D4FA00C95E99 /* Frameworks */,
@@ -207,9 +204,9 @@
 			);
 			dependencies = (
 			);
-			name = "MeshGradient Creator";
+			name = "iOS-Mesh Background Creator";
 			productName = "MeshGradient Creator";
-			productReference = BB929F502C20D4FA00C95E99 /* MeshGradient Creator.app */;
+			productReference = BB929F502C20D4FA00C95E99 /* iOS-Mesh Background Creator.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -244,7 +241,7 @@
 			projectRoot = "";
 			targets = (
 				BB59544F2C1911EF003838AB /* Mesh Background Creator */,
-				BB929F4F2C20D4FA00C95E99 /* MeshGradient Creator */,
+				BB929F4F2C20D4FA00C95E99 /* iOS-Mesh Background Creator */,
 			);
 		};
 /* End PBXProject section */
@@ -286,7 +283,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				BB929F642C20D5D300C95E99 /* AppState.swift in Sources */,
-				BBA2464C2C214F4D008C622F /* ShareSheet.swift in Sources */,
 				BB929F532C20D4FA00C95E99 /* MeshGradient_CreatorApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -481,6 +477,7 @@
 				DEVELOPMENT_TEAM = RKV4UP49S6;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.developer-tools";
 				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "We need acces to save the image to your photo library";
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "Need access to your photo library to save photos";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -494,10 +491,14 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.createchsol.Mesh-Background-Creator";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -515,6 +516,7 @@
 				DEVELOPMENT_TEAM = RKV4UP49S6;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.developer-tools";
 				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "We need acces to save the image to your photo library";
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "Need access to your photo library to save photos";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -528,10 +530,14 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.createchsol.Mesh-Background-Creator";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -560,7 +566,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		BB929F5D2C20D4FB00C95E99 /* Build configuration list for PBXNativeTarget "MeshGradient Creator" */ = {
+		BB929F5D2C20D4FB00C95E99 /* Build configuration list for PBXNativeTarget "iOS-Mesh Background Creator" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				BB929F5B2C20D4FB00C95E99 /* Debug */,

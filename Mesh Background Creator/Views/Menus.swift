@@ -33,7 +33,7 @@ struct Menus: Commands {
             Button("Export as Desktop Image...") {
                 appState.export = true
             }
-                .keyboardShortcut("e", modifiers: [.command])
+            .keyboardShortcut("e", modifiers: [.command])
         }
         CommandGroup(after: .undoRedo) {
             Divider()
