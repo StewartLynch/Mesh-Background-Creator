@@ -3,10 +3,31 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 70;
+	objectVersion = 60;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BB09B21E2C235A7E0012DA3F /* MyGradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB09B21B2C235A7E0012DA3F /* MyGradientView.swift */; };
+		BB09B21F2C235A7E0012DA3F /* InspectorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB09B2182C235A7E0012DA3F /* InspectorView.swift */; };
+		BB09B2202C235A7E0012DA3F /* CodeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB09B2172C235A7E0012DA3F /* CodeView.swift */; };
+		BB09B2212C235A7E0012DA3F /* Menus.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB09B2192C235A7E0012DA3F /* Menus.swift */; };
+		BB09B2222C235A7E0012DA3F /* PointView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB09B21C2C235A7E0012DA3F /* PointView.swift */; };
+		BB09B2232C235A7E0012DA3F /* MeshCreatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB09B21A2C235A7E0012DA3F /* MeshCreatorView.swift */; };
+		BB09B2242C235A7E0012DA3F /* MyGradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB09B21B2C235A7E0012DA3F /* MyGradientView.swift */; };
+		BB09B2252C235A7E0012DA3F /* InspectorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB09B2182C235A7E0012DA3F /* InspectorView.swift */; };
+		BB09B2262C235A7E0012DA3F /* CodeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB09B2172C235A7E0012DA3F /* CodeView.swift */; };
+		BB09B2272C235A7E0012DA3F /* PointView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB09B21C2C235A7E0012DA3F /* PointView.swift */; };
+		BB09B2282C235A7E0012DA3F /* MeshCreatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB09B21A2C235A7E0012DA3F /* MeshCreatorView.swift */; };
+		BB09B22C2C235A9F0012DA3F /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB09B22A2C235A9F0012DA3F /* Models.swift */; };
+		BB09B22D2C235A9F0012DA3F /* Device.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB09B2292C235A9F0012DA3F /* Device.swift */; };
+		BB09B22E2C235A9F0012DA3F /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB09B22A2C235A9F0012DA3F /* Models.swift */; };
+		BB09B22F2C235A9F0012DA3F /* Device.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB09B2292C235A9F0012DA3F /* Device.swift */; };
+		BB09B2342C235AA60012DA3F /* Color+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB09B2302C235AA60012DA3F /* Color+Extension.swift */; };
+		BB09B2352C235AA60012DA3F /* PlaformColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB09B2312C235AA60012DA3F /* PlaformColor+Extension.swift */; };
+		BB09B2362C235AA60012DA3F /* ReadSizeViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB09B2322C235AA60012DA3F /* ReadSizeViewExtension.swift */; };
+		BB09B2372C235AA60012DA3F /* PlaformColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB09B2312C235AA60012DA3F /* PlaformColor+Extension.swift */; };
+		BB09B2382C235AA60012DA3F /* Color+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB09B2302C235AA60012DA3F /* Color+Extension.swift */; };
+		BB09B2392C235AA60012DA3F /* ReadSizeViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB09B2322C235AA60012DA3F /* ReadSizeViewExtension.swift */; };
 		BB180F092C19F9C50060F6E4 /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB180F082C19F9C50060F6E4 /* AppState.swift */; };
 		BB5954542C1911EF003838AB /* Mesh_Background_CreatorApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5954532C1911EF003838AB /* Mesh_Background_CreatorApp.swift */; };
 		BB5954582C1911F0003838AB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BB5954572C1911F0003838AB /* Assets.xcassets */; };
@@ -19,6 +40,17 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		BB09B2172C235A7E0012DA3F /* CodeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodeView.swift; sourceTree = "<group>"; };
+		BB09B2182C235A7E0012DA3F /* InspectorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InspectorView.swift; sourceTree = "<group>"; };
+		BB09B2192C235A7E0012DA3F /* Menus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Menus.swift; sourceTree = "<group>"; };
+		BB09B21A2C235A7E0012DA3F /* MeshCreatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeshCreatorView.swift; sourceTree = "<group>"; };
+		BB09B21B2C235A7E0012DA3F /* MyGradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyGradientView.swift; sourceTree = "<group>"; };
+		BB09B21C2C235A7E0012DA3F /* PointView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PointView.swift; sourceTree = "<group>"; };
+		BB09B2292C235A9F0012DA3F /* Device.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Device.swift; sourceTree = "<group>"; };
+		BB09B22A2C235A9F0012DA3F /* Models.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Models.swift; sourceTree = "<group>"; };
+		BB09B2302C235AA60012DA3F /* Color+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Extension.swift"; sourceTree = "<group>"; };
+		BB09B2312C235AA60012DA3F /* PlaformColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PlaformColor+Extension.swift"; sourceTree = "<group>"; };
+		BB09B2322C235AA60012DA3F /* ReadSizeViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadSizeViewExtension.swift; sourceTree = "<group>"; };
 		BB180F082C19F9C50060F6E4 /* AppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
 		BB5954502C1911EF003838AB /* Mesh Background Creator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Mesh Background Creator.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BB5954532C1911EF003838AB /* Mesh_Background_CreatorApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mesh_Background_CreatorApp.swift; sourceTree = "<group>"; };
@@ -32,63 +64,6 @@
 		BBA246042C2126BC008C622F /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		BBF271F22C22111200E3E100 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
-
-/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
-		BB46CE3B2C1AAB4600508E96 /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
-			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
-			membershipExceptions = (
-				CodeView.swift,
-				InspectorView.swift,
-				Menus.swift,
-				MeshCreatorView.swift,
-				MyGradientView.swift,
-				PointView.swift,
-			);
-			target = BB59544F2C1911EF003838AB /* Mesh Background Creator */;
-		};
-		BB46CE4C2C1AABEE00508E96 /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
-			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
-			membershipExceptions = (
-				Device.swift,
-				Models.swift,
-			);
-			target = BB59544F2C1911EF003838AB /* Mesh Background Creator */;
-		};
-		BB929F5F2C20D52E00C95E99 /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
-			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
-			membershipExceptions = (
-				CodeView.swift,
-				InspectorView.swift,
-				MeshCreatorView.swift,
-				MyGradientView.swift,
-				PointView.swift,
-			);
-			target = BB929F4F2C20D4FA00C95E99 /* iOS-Mesh Background Creator */;
-		};
-		BB929F632C20D5BD00C95E99 /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
-			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
-			membershipExceptions = (
-				Device.swift,
-				Models.swift,
-			);
-			target = BB929F4F2C20D4FA00C95E99 /* iOS-Mesh Background Creator */;
-		};
-		BB929F6C2C20D68E00C95E99 /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
-			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
-			membershipExceptions = (
-				"Color+Extension.swift",
-				"PlaformColor+Extension.swift",
-				ReadSizeViewExtension.swift,
-			);
-			target = BB929F4F2C20D4FA00C95E99 /* iOS-Mesh Background Creator */;
-		};
-/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
-
-/* Begin PBXFileSystemSynchronizedRootGroup section */
-		BB46CE3A2C1AAB4600508E96 /* Views */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (BB46CE3B2C1AAB4600508E96 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, BB929F5F2C20D52E00C95E99 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = Views; sourceTree = "<group>"; };
-		BB46CE3F2C1AABA200508E96 /* Extensions */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (BB929F6C2C20D68E00C95E99 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = Extensions; sourceTree = "<group>"; };
-		BB46CE4B2C1AABEE00508E96 /* Object Models */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (BB46CE4C2C1AABEE00508E96 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, BB929F632C20D5BD00C95E99 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = "Object Models"; sourceTree = "<group>"; };
-/* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		BB59544D2C1911EF003838AB /* Frameworks */ = {
@@ -108,6 +83,38 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		BB09B21D2C235A7E0012DA3F /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				BB09B21A2C235A7E0012DA3F /* MeshCreatorView.swift */,
+				BB09B21C2C235A7E0012DA3F /* PointView.swift */,
+				BB09B21B2C235A7E0012DA3F /* MyGradientView.swift */,
+				BB09B2182C235A7E0012DA3F /* InspectorView.swift */,
+				BB09B2172C235A7E0012DA3F /* CodeView.swift */,
+				BB09B2192C235A7E0012DA3F /* Menus.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		BB09B22B2C235A9F0012DA3F /* Object Models */ = {
+			isa = PBXGroup;
+			children = (
+				BB09B2292C235A9F0012DA3F /* Device.swift */,
+				BB09B22A2C235A9F0012DA3F /* Models.swift */,
+			);
+			path = "Object Models";
+			sourceTree = "<group>";
+		};
+		BB09B2332C235AA60012DA3F /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				BB09B2302C235AA60012DA3F /* Color+Extension.swift */,
+				BB09B2312C235AA60012DA3F /* PlaformColor+Extension.swift */,
+				BB09B2322C235AA60012DA3F /* ReadSizeViewExtension.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		BB5954472C1911EF003838AB = {
 			isa = PBXGroup;
 			children = (
@@ -132,9 +139,9 @@
 			children = (
 				BB5954532C1911EF003838AB /* Mesh_Background_CreatorApp.swift */,
 				BB180F082C19F9C50060F6E4 /* AppState.swift */,
-				BB46CE3A2C1AAB4600508E96 /* Views */,
-				BB46CE4B2C1AABEE00508E96 /* Object Models */,
-				BB46CE3F2C1AABA200508E96 /* Extensions */,
+				BB09B21D2C235A7E0012DA3F /* Views */,
+				BB09B22B2C235A9F0012DA3F /* Object Models */,
+				BB09B2332C235AA60012DA3F /* Extensions */,
 				BB5954572C1911F0003838AB /* Assets.xcassets */,
 				BB59545C2C1911F0003838AB /* Mesh_Background_Creator.entitlements */,
 				BB5954592C1911F0003838AB /* Preview Content */,
@@ -183,9 +190,6 @@
 			buildRules = (
 			);
 			dependencies = (
-			);
-			fileSystemSynchronizedGroups = (
-				BB46CE3F2C1AABA200508E96 /* Extensions */,
 			);
 			name = "Mesh Background Creator";
 			productName = "Mesh Background Creator";
@@ -275,6 +279,17 @@
 			files = (
 				BB5954542C1911EF003838AB /* Mesh_Background_CreatorApp.swift in Sources */,
 				BB180F092C19F9C50060F6E4 /* AppState.swift in Sources */,
+				BB09B22C2C235A9F0012DA3F /* Models.swift in Sources */,
+				BB09B22D2C235A9F0012DA3F /* Device.swift in Sources */,
+				BB09B21E2C235A7E0012DA3F /* MyGradientView.swift in Sources */,
+				BB09B21F2C235A7E0012DA3F /* InspectorView.swift in Sources */,
+				BB09B2202C235A7E0012DA3F /* CodeView.swift in Sources */,
+				BB09B2212C235A7E0012DA3F /* Menus.swift in Sources */,
+				BB09B2222C235A7E0012DA3F /* PointView.swift in Sources */,
+				BB09B2232C235A7E0012DA3F /* MeshCreatorView.swift in Sources */,
+				BB09B2342C235AA60012DA3F /* Color+Extension.swift in Sources */,
+				BB09B2352C235AA60012DA3F /* PlaformColor+Extension.swift in Sources */,
+				BB09B2362C235AA60012DA3F /* ReadSizeViewExtension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -283,6 +298,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				BB929F642C20D5D300C95E99 /* AppState.swift in Sources */,
+				BB09B2242C235A7E0012DA3F /* MyGradientView.swift in Sources */,
+				BB09B2252C235A7E0012DA3F /* InspectorView.swift in Sources */,
+				BB09B2372C235AA60012DA3F /* PlaformColor+Extension.swift in Sources */,
+				BB09B2382C235AA60012DA3F /* Color+Extension.swift in Sources */,
+				BB09B2392C235AA60012DA3F /* ReadSizeViewExtension.swift in Sources */,
+				BB09B22E2C235A9F0012DA3F /* Models.swift in Sources */,
+				BB09B22F2C235A9F0012DA3F /* Device.swift in Sources */,
+				BB09B2262C235A7E0012DA3F /* CodeView.swift in Sources */,
+				BB09B2272C235A7E0012DA3F /* PointView.swift in Sources */,
+				BB09B2282C235A7E0012DA3F /* MeshCreatorView.swift in Sources */,
 				BB929F532C20D4FA00C95E99 /* MeshGradient_CreatorApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
