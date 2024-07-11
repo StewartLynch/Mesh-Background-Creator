@@ -79,12 +79,20 @@ extension PlatformColor {
         guard let components = self.cgColor.components else {
             return 0
         }
-
-        let red = components[0]
-        let green = components[1]
-        let blue = components[2]
-
-        return 0.299 * red + 0.587 * green + 0.114 * blue
+//print(components)
+//        guard components.count == 3 else {
+//             return 1
+//        }
+        if components.count < 3 {
+            return 1.0
+        } else {
+            let red = components[0]
+            let green = components[1]
+            let blue = components[2]
+            
+            return 0.299 * red + 0.587 * green + 0.114 * blue
+            
+        }
     }
     
     // Computed property to get adapted text color based on luminance

@@ -118,6 +118,7 @@
 		BB5954472C1911EF003838AB = {
 			isa = PBXGroup;
 			children = (
+				BB09B22B2C235A9F0012DA3F /* Object Models */,
 				BBF271F22C22111200E3E100 /* README.md */,
 				BB5954522C1911EF003838AB /* Mesh Background Creator */,
 				BB929F512C20D4FA00C95E99 /* MeshGradient Creator */,
@@ -140,7 +141,6 @@
 				BB5954532C1911EF003838AB /* Mesh_Background_CreatorApp.swift */,
 				BB180F082C19F9C50060F6E4 /* AppState.swift */,
 				BB09B21D2C235A7E0012DA3F /* Views */,
-				BB09B22B2C235A9F0012DA3F /* Object Models */,
 				BB09B2332C235AA60012DA3F /* Extensions */,
 				BB5954572C1911F0003838AB /* Assets.xcassets */,
 				BB59545C2C1911F0003838AB /* Mesh_Background_Creator.entitlements */,
