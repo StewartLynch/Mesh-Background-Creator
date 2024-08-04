@@ -23,8 +23,21 @@ struct PointView: View {
     let symbol: String
     @Bindable var meshPoint: MPoint
     var body: some View {
-        ColorPicker("\(index + 1)", selection: $meshPoint.color, supportsOpacity: true)
-            .labelsHidden()
+Group {
+    #if os(macOS)
+            Image(systemName: "\(symbol).fill")
+                        .font(.title)
+                        .foregroundStyle(meshPoint.color)
+                        .overlay {
+                            Text("\(index + 1)")
+                                .font(.body)
+                                .foregroundStyle(meshPoint.color.adaptedTextColor)
+                        }
+            #else
+            ColorPicker("\(index + 1)", selection: $meshPoint.color, supportsOpacity: true)
+                .labelsHidden()
+    #endif
+}
             .position(x: (meshPoint.xCoord * selectedDevice.width) + (size.width - selectedDevice.width) / 2,
                       y: (meshPoint.yCoord * selectedDevice.height) + (size.height - selectedDevice.height) / 2)
             .gesture(DragGesture()
