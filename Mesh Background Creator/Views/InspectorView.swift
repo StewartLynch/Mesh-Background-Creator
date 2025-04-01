@@ -29,7 +29,7 @@ struct InspectorView: View {
                 Group {
                     LabeledContent("Width:") {
                         Menu("\(width)") {
-                            ForEach(3..<10) { index in
+                            ForEach(2..<10) { index in
                                 Button("\(index)") {
                                     if index != selectedObject.width {
                                         appState.tempObject = selectedObject
@@ -44,7 +44,7 @@ struct InspectorView: View {
                     }
                     LabeledContent("Height") {
                         Menu("\(height)") {
-                            ForEach(3..<10) { index in
+                            ForEach(2..<10) { index in
                                 Button("\(index)") {
                                     if index != selectedObject.height {
                                         appState.tempObject = selectedObject
